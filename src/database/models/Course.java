@@ -15,6 +15,20 @@ public class Course {
             String code,
             String title,
             String description,
+            String credit
+    ) {
+        this.id = id;
+        this.code = code;
+        this.title = title;
+        this.description = description;
+        this.credit = credit;
+    }
+
+    public Course(
+            Integer id,
+            String code,
+            String title,
+            String description,
             String credit,
             List<Course> prerequisites
     ) {
