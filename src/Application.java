@@ -9,7 +9,7 @@ public class Application {
         Repository repo = new Repository();
         List<Course> courses = repo.getCourses();
         for (Course course : courses) {
-            System.out.println(course);
+            System.out.println(course+ "-->"+ course.getPrerequisites());
         }
     }
 }
