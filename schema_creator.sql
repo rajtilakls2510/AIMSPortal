@@ -64,7 +64,7 @@ create table course (
     code varchar(10) not null,
     title varchar(100) not null,
     description varchar(255),
-    credit int,
+    credit varchar(10),
     primary key (id)
 );
 
