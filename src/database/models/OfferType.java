@@ -3,12 +3,12 @@ package database.models;
 public class OfferType {
 
     private Batch batch;
-    private CourseOffer offer;
+    private Course course;
     private OfferTypeEnum type;
 
-    public OfferType(Batch batch, CourseOffer offer, OfferTypeEnum type) {
+    public OfferType(Batch batch, Course course, OfferTypeEnum type) {
         this.batch = batch;
-        this.offer = offer;
+        this.course = course;
         this.type = type;
     }
 
@@ -20,12 +20,12 @@ public class OfferType {
         this.batch = batch;
     }
 
-    public CourseOffer getOffer() {
-        return offer;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setOffer(CourseOffer offer) {
-        this.offer = offer;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public OfferTypeEnum getType() {
@@ -40,7 +40,7 @@ public class OfferType {
     public String toString() {
         return "OfferType{" +
                 "batch=" + batch +
-                ", offer=" + offer +
+                ", course=" + course +
                 ", type=" + type +
                 '}';
     }

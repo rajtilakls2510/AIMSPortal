@@ -12,9 +12,15 @@ public abstract class Screen {
     protected Screen backScreen;
 
     public Screen() {
-        title = "Screen";
-        option = "Some screen";
+        title = "";
+        option = "";
         subScreens = new ArrayList<>();
+    }
+
+    public Screen(String title, String option){
+        this();
+        this.title = title;
+        this.option = option;
     }
 
     abstract public void process();
@@ -35,9 +41,14 @@ public abstract class Screen {
 
             if (choice > 0 && choice <= subScreens.size())
                 subScreens.get(choice - 1).show();
-            else if (choice < 0 || choice > subScreens.size())
+            else if (choice < 0 || choice > subScreens.size()) {
                 System.out.println("Invalid Option!");
-            // TODO: Apply Sleep
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ignored) {
+                }
+            }
+
         } while (choice != 0);
     }
 

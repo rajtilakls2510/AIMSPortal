@@ -1,0 +1,24 @@
+- welcome
+	-- student
+	-- faculty
+	-- acadoffice
+	-- exit
+	
+-- student
+	--- view grade (show all sem grade and CGPA)
+	--- course registration (show all offered courses for current session and ask for registration)
+	--- withdraw course (show all registered courses for current session)
+	--- check graduation
+	--- show/register for MTP (show all available faculties and available mtps)
+	--- logout
+
+-- faculty
+	--- offer a course (show available courses not offered in this current session)
+	--- view offered courses (show offered course list, course details, student/grades and grade entry)
+	--- view MTPs (show offered MTPs and people working, add a MTP, credit entry)
+	--- logout
+
+-- acadoffice
+	--- course catalog (view courses, add course, edit course, delete course)
+	--- view grade of a student and download transcript
+	--- logout
