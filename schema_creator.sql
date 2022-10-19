@@ -98,7 +98,7 @@ create table offertype (
 	batch_id int not null,
     course_id int not null,
     type varchar(10) not null,
-    primary key (batch_id, offer_id),
+    primary key (batch_id, course_id),
     foreign key (batch_id) references batch (id) on delete cascade,
     foreign key (course_id) references course (id) on delete cascade
 );
