@@ -16,8 +16,9 @@ public class Repository {
 
     public Repository() {
         try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(DBCredentials.dbUrl, DBCredentials.username, DBCredentials.password);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new DBConnectionException("Could not connect to database!");
         }
     }

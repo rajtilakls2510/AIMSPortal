@@ -24,9 +24,10 @@ public abstract class Screen {
     }
 
     abstract public void process();
+    abstract public void preScreenProcess();
 
     public void show() {
-
+        preScreenProcess();
         int choice = 1;
         do {
             clearConsole();

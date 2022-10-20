@@ -7,12 +7,13 @@ public class BackScreen extends Screen {
     }
 
     @Override
-    public void process() {
+    public void preScreenProcess() {
 
     }
 
     @Override
-    public void show() {
-        super.show();
+    public void process() {
+
     }
+
 }
