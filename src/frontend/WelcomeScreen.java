@@ -1,8 +1,11 @@
 package frontend;
 
+import frontend.acadoffice.AcadOfficeScreen;
+import frontend.faculty.FacultyScreen;
+import frontend.student.StudentScreen;
+
 public class WelcomeScreen extends Screen {
     public WelcomeScreen() {
-        super();
         title = "Welcome to AIMS Portal";
         subScreens.add(new StudentScreen());
         subScreens.add(new FacultyScreen());

@@ -1,8 +1,11 @@
-package frontend;
+package frontend.acadoffice;
+
+import frontend.AuthScreen;
+import frontend.BackScreen;
+import frontend.Screen;
 
 public class AcadOfficeScreen extends Screen {
     public AcadOfficeScreen() {
-        super();
         title = "Welcome Officer ";
         option = "Academic Officer";
         backScreen = new BackScreen("", "Logout");

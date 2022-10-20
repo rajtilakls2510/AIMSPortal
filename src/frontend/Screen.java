@@ -15,6 +15,7 @@ public abstract class Screen {
         title = "";
         option = "";
         subScreens = new ArrayList<>();
+        // Don't add back screen otherwise infine recursion
     }
 
     public Screen(String title, String option){
@@ -26,7 +27,7 @@ public abstract class Screen {
     abstract public void process();
     abstract public void preScreenProcess();
 
-    public void show() {
+    public void show() throws RuntimeException{
         preScreenProcess();
         int choice = 1;
         do {
@@ -41,11 +42,16 @@ public abstract class Screen {
             choice = sc.nextInt();
 
             if (choice > 0 && choice <= subScreens.size())
-                subScreens.get(choice - 1).show();
+            {
+                try {
+                    subScreens.get(choice - 1).show();
+                }catch (Exception ignored)
+                {}
+            }
             else if (choice < 0 || choice > subScreens.size()) {
                 System.out.println("Invalid Option!");
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(1000);
                 } catch (InterruptedException ignored) {
                 }
             }

@@ -1,8 +1,11 @@
-package frontend;
+package frontend.faculty;
+
+import frontend.AuthScreen;
+import frontend.BackScreen;
+import frontend.Screen;
 
 public class FacultyScreen extends Screen {
     public FacultyScreen() {
-        super();
         title = "Welcome Dr. ";
         option = "Faculty";
         backScreen = new BackScreen("", "Logout");

@@ -6,13 +6,11 @@ import java.util.Scanner;
 public class AuthScreen extends Screen {
 
     public AuthScreen() {
-        super();
         title = "Please Login";
-        backScreen = new BackScreen("","");
     }
 
     @Override
-    public void preScreenProcess() {
+    public void preScreenProcess() throws InvalidCredentialsException {
 
         Console console = System.console();
         String email, password;
@@ -29,6 +27,12 @@ public class AuthScreen extends Screen {
             email = console.readLine("Enter email: ").strip();
             password = new String(console.readPassword("Enter password: ")).strip();
         }
+        /*System.out.println("Wrong email and Password");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ignored) {
+        }
+        throw new InvalidCredentialsException();*/
     }
 
     @Override
