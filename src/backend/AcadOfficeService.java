@@ -25,6 +25,11 @@ public class AcadOfficeService {
         return new ArrayList<>();
     }
 
+    public Course getCourse(String courseCode) throws SQLException {
+        // Fetch the course
+        return null;
+    }
+
     public List<CourseRegister> getGrade(String entry) throws SQLException {
 
         StudentService studentService = StudentService.getInstance();
@@ -35,5 +40,16 @@ public class AcadOfficeService {
 
         StudentService studentService = StudentService.getInstance();
         return studentService.getCgpa(entry);
+    }
+
+    public void addCourse(Course course) throws SQLException {
+        // Add a course
+    }
+
+    public void editCourse(Course course) throws SQLException{
+        // Edit a course
+    }
+    public void deleteCourse(String courseCode) throws SQLException {
+        // Delete a course
     }
 }

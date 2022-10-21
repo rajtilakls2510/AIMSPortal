@@ -42,6 +42,8 @@ public class DownloadTranscriptScreen extends ProtectedScreen {
 
     @Override
     public void show() throws RuntimeException {
+        preScreenProcess();
         process();
+        postScreenProcess();
     }
 }

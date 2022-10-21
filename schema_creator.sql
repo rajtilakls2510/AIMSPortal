@@ -117,7 +117,7 @@ create table courseregister (
 
 create table mtpinfo (
 	id int not null auto_increment,
-    student_id int not null,
+    student_id int null,
     faculty_id int not null,
     title varchar(100) not null,
     domains varchar(255),

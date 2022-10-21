@@ -6,14 +6,14 @@ import frontend.BackScreen;
 import frontend.ProtectedScreen;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class MTPDetailsScreen extends ProtectedScreen {
-    public MTPDetailsScreen() {
-        title = "Master Thesis Projects";
-        option = "MTP Details";
-        subScreens.add(new AddMTPScreen());
-        subScreens.add(new CreditEntryScreen());
+public class CreditEntryScreen extends ProtectedScreen {
+
+    public CreditEntryScreen() {
+        title = "Credit Entry";
+        option = "Enter Credit for an MTP";
         backScreen = new BackScreen("", "Back");
     }
 
@@ -22,9 +22,16 @@ public class MTPDetailsScreen extends ProtectedScreen {
         FacultyService service = FacultyService.getInstance();
         try {
             List<MTPInfo> mtps = service.getMTPInfo();
-            // TODO: Show all available MTPs and student working on it (if there is)
+
+            subScreens = new ArrayList<>();
+            for(MTPInfo mtp: mtps)
+            {
+                if(mtp.getStudent() !=null)
+                subScreens.add(new MTPCreditEntryScreen(mtp.getTitle(), mtp.getTitle(), mtp.getId())); // TODO: Format Title
+            }
         } catch (SQLException e) {
             System.out.println("Sorry! Some error occured");
         }
     }
+
 }

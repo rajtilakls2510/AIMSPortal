@@ -24,6 +24,8 @@ public class StudentGradeScreen extends ProtectedScreen {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter Student's Entry No (Press ENTER to ignore): ");
         String entry = sc.nextLine().strip();
+        if(entry.equals(""))
+            return;
         MessagePasser.getInstance().getMessages().put("Entry", entry);
         try {
             List<CourseRegister> registeredCourses = service.getGrade(entry);

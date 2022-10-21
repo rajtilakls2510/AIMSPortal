@@ -14,10 +14,10 @@ public class Application {
             System.out.println(course+ "-->"+ course.getPrerequisites());
         }*/
         new WelcomeScreen().show();
-        CourseService courseService = new CourseService(new Repository());
+        /*CourseService courseService = new CourseService(new Repository());
         List<Course> courses = courseService.getCourses();
         for (Course c : courses) {
             System.out.println(c + " : " + c.getPrerequisites());
-        }
+        }*/
     }
 }
