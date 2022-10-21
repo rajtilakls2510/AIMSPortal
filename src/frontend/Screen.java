@@ -18,16 +18,22 @@ public abstract class Screen {
         // Don't add back screen otherwise infine recursion
     }
 
-    public Screen(String title, String option){
+    public Screen(String title, String option) {
         this();
         this.title = title;
         this.option = option;
     }
 
-    abstract public void process();
-    abstract public void preScreenProcess();
+    public void process() {
+    }
 
-    public void show() throws RuntimeException{
+    public void preScreenProcess() {
+    }
+
+    public void postScreenProcess() {
+    }
+
+    public void show() throws RuntimeException {
         preScreenProcess();
         int choice = 1;
         do {
@@ -41,14 +47,12 @@ public abstract class Screen {
             Scanner sc = new Scanner(System.in);
             choice = sc.nextInt();
 
-            if (choice > 0 && choice <= subScreens.size())
-            {
+            if (choice > 0 && choice <= subScreens.size()) {
                 try {
                     subScreens.get(choice - 1).show();
-                }catch (Exception ignored)
-                {}
-            }
-            else if (choice < 0 || choice > subScreens.size()) {
+                } catch (Exception ignored) {
+                }
+            } else if (choice < 0 || choice > subScreens.size()) {
                 System.out.println("Invalid Option!");
                 try {
                     Thread.sleep(1000);
@@ -57,6 +61,7 @@ public abstract class Screen {
             }
 
         } while (choice != 0);
+        postScreenProcess();
     }
 
     public void clearConsole() {

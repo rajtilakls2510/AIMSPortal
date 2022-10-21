@@ -12,14 +12,4 @@ public class WelcomeScreen extends Screen {
         subScreens.add(new AcadOfficeScreen());
         backScreen = new BackScreen("", "Exit");
     }
-
-    @Override
-    public void preScreenProcess() {
-
-    }
-
-    @Override
-    public void process() {
-
-    }
 }

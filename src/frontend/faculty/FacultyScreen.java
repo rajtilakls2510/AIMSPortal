@@ -20,7 +20,7 @@ public class FacultyScreen extends Screen {
     }
 
     @Override
-    public void process() {
-
+    public void postScreenProcess() {
+        // TODO: Remove Login Session and AuthInfo
     }
 }

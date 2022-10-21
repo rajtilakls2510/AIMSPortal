@@ -39,11 +39,6 @@ public class AuthScreen extends Screen {
     }
 
     @Override
-    public void process() {
-
-    }
-
-    @Override
     public void show() {
         clearConsole();
         System.out.println("\n" + title + "\n");

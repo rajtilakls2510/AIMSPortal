@@ -5,15 +5,4 @@ public class BackScreen extends Screen {
         this.title = title;
         this.option = option;
     }
-
-    @Override
-    public void preScreenProcess() {
-
-    }
-
-    @Override
-    public void process() {
-
-    }
-
 }

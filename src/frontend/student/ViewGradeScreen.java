@@ -10,13 +10,4 @@ public class ViewGradeScreen extends Screen {
         backScreen = new BackScreen("","Back");
     }
 
-    @Override
-    public void process() {
-
-    }
-
-    @Override
-    public void preScreenProcess() {
-
-    }
 }

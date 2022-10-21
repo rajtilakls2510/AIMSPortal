@@ -10,13 +10,4 @@ public class OfferCourseScreen extends Screen {
         backScreen = new BackScreen("", "Back");
     }
 
-    @Override
-    public void process() {
-
-    }
-
-    @Override
-    public void preScreenProcess() {
-
-    }
 }
