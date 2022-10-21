@@ -7,7 +7,7 @@ import frontend.Screen;
 public class StudentScreen extends Screen {
 
     public StudentScreen() {
-        title = "Welcome Mr. ";
+        title = "Welcome Mr. "; // TODO: Add name
         option = "Student";
         subScreens.add(new ViewGradeScreen());
         subScreens.add(new CourseRegistrationScreen());

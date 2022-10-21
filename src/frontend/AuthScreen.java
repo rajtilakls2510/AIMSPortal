@@ -27,6 +27,9 @@ public class AuthScreen extends Screen {
             email = console.readLine("Enter email: ").strip();
             password = new String(console.readPassword("Enter password: ")).strip();
         }
+
+        // TODO: Write Email and Password fetch and authentication
+
         /*System.out.println("Wrong email and Password");
         try {
             Thread.sleep(1000);
