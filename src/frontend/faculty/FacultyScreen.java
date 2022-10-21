@@ -1,8 +1,11 @@
 package frontend.faculty;
 
+import backend.AuthService;
 import frontend.AuthScreen;
 import frontend.BackScreen;
 import frontend.Screen;
+
+import java.sql.SQLException;
 
 public class FacultyScreen extends Screen {
     public FacultyScreen() {
@@ -21,6 +24,9 @@ public class FacultyScreen extends Screen {
 
     @Override
     public void postScreenProcess() {
-        // TODO: Remove Login Session and AuthInfo
+        try {
+            AuthService.getInstance().logoutUser();
+        } catch (SQLException ignored) {
+        }
     }
 }

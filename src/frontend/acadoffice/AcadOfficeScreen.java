@@ -1,8 +1,11 @@
 package frontend.acadoffice;
 
+import backend.AuthService;
 import frontend.AuthScreen;
 import frontend.BackScreen;
 import frontend.Screen;
+
+import java.sql.SQLException;
 
 public class AcadOfficeScreen extends Screen {
     public AcadOfficeScreen() {
@@ -20,6 +23,9 @@ public class AcadOfficeScreen extends Screen {
 
     @Override
     public void postScreenProcess() {
-        // TODO: Remove Login Session and AuthInfo
+        try {
+            AuthService.getInstance().logoutUser();
+        } catch (SQLException ignored) {
+        }
     }
 }

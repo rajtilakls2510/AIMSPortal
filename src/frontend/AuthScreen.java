@@ -1,6 +1,9 @@
 package frontend;
 
+import backend.AuthService;
+
 import java.io.Console;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class AuthScreen extends Screen {
@@ -28,14 +31,21 @@ public class AuthScreen extends Screen {
             password = new String(console.readPassword("Enter password: ")).strip();
         }
 
-        // TODO: Write Email and Password fetch and authentication
-
-        /*System.out.println("Wrong email and Password");
+        AuthService authService = AuthService.getInstance();
         try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ignored) {
+            if(!authService.validateUser(email, password))
+            {
+                System.out.println("Wrong email and Password");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ignored) {
+                }
+                throw new InvalidCredentialsException();
+            }
+        } catch (SQLException e) {
+            System.out.println("Sorry! Some error occured!");
         }
-        throw new InvalidCredentialsException();*/
+
     }
 
     @Override
