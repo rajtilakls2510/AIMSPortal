@@ -3,12 +3,12 @@ package frontend.acadoffice;
 import backend.AcadOfficeService;
 import database.models.Course;
 import frontend.BackScreen;
-import frontend.Screen;
+import frontend.ProtectedScreen;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class CourseCatalogScreen extends Screen {
+public class CourseCatalogScreen extends ProtectedScreen {
     public CourseCatalogScreen() {
         title = "Course Catalogue";
         option = "Course catalog";

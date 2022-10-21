@@ -26,4 +26,9 @@ public class AuthService {
     public void logoutUser() throws SQLException {
         // Remove the user from LoggedInUser and from login session
     }
+
+    public boolean checkLoggedInUser(String email) throws SQLException {
+        // Check User has an active login session or not
+        return true;
+    }
 }

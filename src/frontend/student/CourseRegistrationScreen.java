@@ -1,13 +1,13 @@
 package frontend.student;
 
 import frontend.BackScreen;
-import frontend.Screen;
+import frontend.ProtectedScreen;
 
-public class CourseRegistrationScreen extends Screen {
+public class CourseRegistrationScreen extends ProtectedScreen {
     public CourseRegistrationScreen() {
-        title="Course Registration";
-        option="Register for a Course";
-        backScreen=new BackScreen("", "Back");
+        title = "Course Registration";
+        option = "Register for a Course";
+        backScreen = new BackScreen("", "Back");
     }
 
 }

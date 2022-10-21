@@ -1,9 +1,9 @@
 package frontend.faculty;
 
 import frontend.BackScreen;
-import frontend.Screen;
+import frontend.ProtectedScreen;
 
-public class OfferCourseScreen extends Screen {
+public class OfferCourseScreen extends ProtectedScreen {
     public OfferCourseScreen() {
         title = "Offer a Course";
         option = "Offer Course";

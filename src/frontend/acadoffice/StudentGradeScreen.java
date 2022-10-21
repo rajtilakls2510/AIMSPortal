@@ -3,13 +3,13 @@ package frontend.acadoffice;
 import backend.AcadOfficeService;
 import database.models.CourseRegister;
 import frontend.BackScreen;
-import frontend.Screen;
+import frontend.ProtectedScreen;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-public class StudentGradeScreen extends Screen {
+public class StudentGradeScreen extends ProtectedScreen {
     public StudentGradeScreen() {
         title = "View Student Grade";
         option = "Grade of a student";

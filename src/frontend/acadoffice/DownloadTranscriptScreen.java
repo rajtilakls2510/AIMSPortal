@@ -3,13 +3,13 @@ package frontend.acadoffice;
 import backend.AcadOfficeService;
 import database.models.CourseRegister;
 import frontend.BackScreen;
-import frontend.Screen;
+import frontend.ProtectedScreen;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-public class DownloadTranscriptScreen extends Screen {
+public class DownloadTranscriptScreen extends ProtectedScreen {
 
     public DownloadTranscriptScreen() {
         title = "Download Transcript";
@@ -30,6 +30,11 @@ public class DownloadTranscriptScreen extends Screen {
             Integer cgpa = service.getCgpa(entry);
             // TODO: Store Cgpa
             // TODO: Store in file
+            System.out.println("File Downloaded");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {
+            }
         } catch (SQLException e) {
             System.out.println("Could not fetch Grades!");
         }

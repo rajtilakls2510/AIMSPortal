@@ -1,9 +1,9 @@
 package frontend.student;
 
 import frontend.BackScreen;
-import frontend.Screen;
+import frontend.ProtectedScreen;
 
-public class ShowMTPScreen extends Screen {
+public class ShowMTPScreen extends ProtectedScreen {
     public ShowMTPScreen() {
         title = "Show/Register for an MTP";
         option = "Show/Register for MTP";

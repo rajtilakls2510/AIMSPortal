@@ -10,7 +10,7 @@ public class LoggedInUser {
         email = null;
     }
 
-    public LoggedInUser getInstance() {
+    public static LoggedInUser getInstance() {
         if (instance == null)
             instance = new LoggedInUser();
         return instance;

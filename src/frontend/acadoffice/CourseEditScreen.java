@@ -1,9 +1,9 @@
 package frontend.acadoffice;
 
 import frontend.BackScreen;
-import frontend.Screen;
+import frontend.ProtectedScreen;
 
-public class CourseEditScreen extends Screen {
+public class CourseEditScreen extends ProtectedScreen {
     public CourseEditScreen() {
         title = "Edit a Course";
         option = "Edit Course";

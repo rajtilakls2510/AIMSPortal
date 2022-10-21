@@ -1,9 +1,9 @@
 package frontend.acadoffice;
 
 import frontend.BackScreen;
-import frontend.Screen;
+import frontend.ProtectedScreen;
 
-public class CourseDeleteScreen extends Screen {
+public class CourseDeleteScreen extends ProtectedScreen {
     public CourseDeleteScreen() {
         title = "Delete a course";
         option = "Delete Course";

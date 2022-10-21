@@ -1,13 +1,13 @@
 package frontend.student;
 
 import frontend.BackScreen;
-import frontend.Screen;
+import frontend.ProtectedScreen;
 
-public class WithdrawCourseScreen extends Screen {
+public class WithdrawCourseScreen extends ProtectedScreen {
     public WithdrawCourseScreen() {
         title = "Withdraw from a Course";
         option = "Withdraw Course";
-        backScreen = new BackScreen("","Back");
+        backScreen = new BackScreen("", "Back");
     }
 
 }
