@@ -3,15 +3,19 @@ package backend;
 import database.models.Course;
 import database.models.CourseRegister;
 import database.models.MTPInfo;
+import database.repositories.FacultyRepo;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class FacultyService {
     private static FacultyService instance;
+    private FacultyRepo facultyRepo;
 
     private FacultyService()
-    {}
+    {
+        facultyRepo = new FacultyRepo();
+    }
 
     public static FacultyService getInstance()
     {
@@ -22,6 +26,7 @@ public class FacultyService {
 
     public List<Course> getAllOfferedCourses() throws SQLException {
         // Fetch all courses that this faculty is currently offering
+        List<Course> courses = facultyRepo.getCourses(); // TODO: Not correct. change IMPL
         return null;
     }
 
