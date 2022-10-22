@@ -4,6 +4,7 @@ public class LoggedInUser {
     private static LoggedInUser instance;
     private String name;
     private String email;
+    private String id;
 
     private LoggedInUser() {
         name = null;
@@ -30,5 +31,13 @@ public class LoggedInUser {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
