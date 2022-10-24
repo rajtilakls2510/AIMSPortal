@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class StudentScreen extends Screen {
 
     public StudentScreen() {
-        title = "Welcome Mr. "; // TODO: Add name
+        title = "Welcome Mr. ";
         option = "Student";
         subScreens.add(new ViewGradeScreen());
         subScreens.add(new CourseRegistrationScreen());

@@ -14,7 +14,7 @@ public class MTPDetailsScreen extends ProtectedScreen {
         option = "MTP Details";
         subScreens.add(new AddMTPScreen());
         subScreens.add(new CreditEntryScreen());
-        backScreen = new BackScreen("", "Back");
+        backScreen = new BackScreen();
     }
 
     @Override

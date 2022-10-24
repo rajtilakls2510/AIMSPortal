@@ -11,7 +11,7 @@ public class CourseAddScreen extends ProtectedScreen {
     public CourseAddScreen() {
         title = "Add a Course";
         option = "Add Course";
-        backScreen = new BackScreen("", "Back");
+        backScreen = new BackScreen();
     }
 
     @Override
@@ -29,6 +29,8 @@ public class CourseAddScreen extends ProtectedScreen {
     @Override
     public void show() throws RuntimeException {
         preScreenProcess();
+        clearConsole();
+        System.out.println("\n" + title + "\n");
         process();
         postScreenProcess();
     }

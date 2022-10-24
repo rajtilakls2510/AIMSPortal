@@ -14,7 +14,7 @@ public class ViewGradeScreen extends ProtectedScreen {
     public ViewGradeScreen() {
         title = "Your grades uptill date!";
         option = "View Grades and CGPA";
-        backScreen = new BackScreen("", "Back");
+        backScreen = new BackScreen();
     }
 
     @Override

@@ -2,7 +2,7 @@ package frontend.faculty;
 
 import frontend.BackScreen;
 import frontend.ProtectedScreen;
-import frontend.acadoffice.MessagePasser;
+import frontend.MessagePasser;
 
 import java.util.Scanner;
 
@@ -10,7 +10,7 @@ public class GradeEntryScreen extends ProtectedScreen {
     public GradeEntryScreen() {
         this.title = "Perform Grade Entry";
         option = "Grade Entry";
-        backScreen = new BackScreen("", "Back");
+        backScreen = new BackScreen();
     }
 
     @Override

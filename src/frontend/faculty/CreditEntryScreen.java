@@ -14,7 +14,7 @@ public class CreditEntryScreen extends ProtectedScreen {
     public CreditEntryScreen() {
         title = "Credit Entry";
         option = "Enter Credit for an MTP";
-        backScreen = new BackScreen("", "Back");
+        backScreen = new BackScreen();
     }
 
     @Override

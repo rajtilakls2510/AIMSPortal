@@ -3,6 +3,7 @@ package frontend.acadoffice;
 import backend.AcadOfficeService;
 import database.models.CourseRegister;
 import frontend.BackScreen;
+import frontend.MessagePasser;
 import frontend.ProtectedScreen;
 
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ public class DownloadTranscriptScreen extends ProtectedScreen {
     public DownloadTranscriptScreen() {
         title = "Download Transcript";
         option = "Download Transcript";
-        backScreen = new BackScreen("", "Back");
+        backScreen = new BackScreen();
     }
 
     @Override
@@ -43,6 +44,8 @@ public class DownloadTranscriptScreen extends ProtectedScreen {
     @Override
     public void show() throws RuntimeException {
         preScreenProcess();
+        clearConsole();
+        System.out.println("\n" + title + "\n");
         process();
         postScreenProcess();
     }

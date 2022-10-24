@@ -15,7 +15,7 @@ public class CourseCatalogScreen extends ProtectedScreen {
         subScreens.add(new CourseAddScreen());
         subScreens.add(new CourseEditScreen());
         subScreens.add(new CourseDeleteScreen());
-        backScreen = new BackScreen("", "Back");
+        backScreen = new BackScreen();
     }
 
     @Override

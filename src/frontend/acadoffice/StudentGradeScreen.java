@@ -3,6 +3,7 @@ package frontend.acadoffice;
 import backend.AcadOfficeService;
 import database.models.CourseRegister;
 import frontend.BackScreen;
+import frontend.MessagePasser;
 import frontend.ProtectedScreen;
 
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ public class StudentGradeScreen extends ProtectedScreen {
         title = "View Student Grade";
         option = "Grade of a student";
         subScreens.add(new DownloadTranscriptScreen());
-        backScreen = new BackScreen("", "Back");
+        backScreen = new BackScreen();
     }
 
     @Override

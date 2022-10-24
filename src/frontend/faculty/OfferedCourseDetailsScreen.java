@@ -2,10 +2,9 @@ package frontend.faculty;
 
 import backend.FacultyService;
 import database.models.CourseRegister;
-import database.models.Faculty;
 import frontend.BackScreen;
 import frontend.ProtectedScreen;
-import frontend.acadoffice.MessagePasser;
+import frontend.MessagePasser;
 
 import java.sql.SQLException;
 
@@ -16,7 +15,7 @@ public class OfferedCourseDetailsScreen extends ProtectedScreen {
         this.option = option;
         this.courseCode = courseCode;
         subScreens.add(new GradeEntryScreen());
-        backScreen = new BackScreen("", "Back");
+        backScreen = new BackScreen();
     }
 
     @Override

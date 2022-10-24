@@ -60,5 +60,7 @@ public class AuthScreen extends Screen {
         clearConsole();
         System.out.println("\n" + title + "\n");
         preScreenProcess();
+        process();
+        postScreenProcess();
     }
 }
