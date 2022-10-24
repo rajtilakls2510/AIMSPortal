@@ -1,9 +1,7 @@
 package frontend.faculty;
 
 import backend.AuthService;
-import frontend.AuthScreen;
-import frontend.BackScreen;
-import frontend.Screen;
+import frontend.*;
 
 import java.sql.SQLException;
 
@@ -19,7 +17,8 @@ public class FacultyScreen extends Screen {
 
     @Override
     public void preScreenProcess() {
-        new AuthScreen().show();
+        new AuthScreen(UserType.FACULTY).show();
+        title += LoggedInUser.getInstance().getName();
     }
 
     @Override

@@ -21,7 +21,7 @@ public class StudentService {
         return instance;
     }
 
-    public Student getStudentDetails(String id) throws SQLException {
+    public Student getStudentDetails(Integer id) throws SQLException {
         // Fetch the details of the student with this id
         return null;
     }

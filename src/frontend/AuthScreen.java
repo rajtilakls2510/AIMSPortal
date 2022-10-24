@@ -8,12 +8,15 @@ import java.util.Scanner;
 
 public class AuthScreen extends Screen {
 
-    public AuthScreen() {
+    private UserType userType;
+
+    public AuthScreen(UserType userType) {
         title = "Please Login";
+        this.userType = userType;
     }
 
     @Override
-    public void preScreenProcess() throws InvalidCredentialsException {
+    public void preScreenProcess(){
 
         Console console = System.console();
         String email, password;
@@ -30,12 +33,11 @@ public class AuthScreen extends Screen {
             email = console.readLine("Enter email: ").strip();
             password = new String(console.readPassword("Enter password: ")).strip();
         }
-
         AuthService authService = AuthService.getInstance();
         try {
-            if(!authService.validateUser(email, password))
+            if(!authService.validateUser(email, password, userType))
             {
-                System.out.println("Wrong email and Password");
+                System.out.println("Invalid email or Password");
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ignored) {
@@ -44,6 +46,11 @@ public class AuthScreen extends Screen {
             }
         } catch (SQLException e) {
             System.out.println("Sorry! Some error occured!");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {
+            }
+            throw new RuntimeException();
         }
 
     }

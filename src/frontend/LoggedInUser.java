@@ -4,7 +4,7 @@ public class LoggedInUser {
     private static LoggedInUser instance;
     private String name;
     private String email;
-    private String id;
+    private Integer id;
 
     private LoggedInUser() {
         name = null;
@@ -33,11 +33,11 @@ public class LoggedInUser {
         this.email = email;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }
