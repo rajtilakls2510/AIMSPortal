@@ -39,6 +39,8 @@ public class CourseRegisterConfirmScreen extends ProtectedScreen {
     @Override
     public void show() throws RuntimeException {
         preScreenProcess();
+        clearConsole();
+        System.out.println("\n" + title + "\n");
         process();
         postScreenProcess();
     }

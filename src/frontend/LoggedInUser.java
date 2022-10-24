@@ -4,9 +4,12 @@ public class LoggedInUser {
     private static LoggedInUser instance;
     private String name;
     private String email;
+    private Integer userId;
     private Integer id;
 
     private LoggedInUser() {
+        userId = null;
+        id = null;
         name = null;
         email = null;
     }
@@ -15,6 +18,14 @@ public class LoggedInUser {
         if (instance == null)
             instance = new LoggedInUser();
         return instance;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getName() {

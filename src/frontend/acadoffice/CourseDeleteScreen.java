@@ -11,7 +11,7 @@ public class CourseDeleteScreen extends ProtectedScreen {
     public CourseDeleteScreen() {
         title = "Delete a course";
         option = "Delete Course";
-        backScreen = new BackScreen("", "Back");
+        backScreen = new BackScreen();
     }
 
     @Override
@@ -32,6 +32,8 @@ public class CourseDeleteScreen extends ProtectedScreen {
     @Override
     public void show() throws RuntimeException {
         preScreenProcess();
+        clearConsole();
+        System.out.println("\n" + title + "\n");
         process();
         postScreenProcess();
     }
