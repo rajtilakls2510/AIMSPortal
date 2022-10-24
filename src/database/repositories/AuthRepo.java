@@ -29,29 +29,33 @@ public class AuthRepo extends Repository {
         return Optional.of(auth);
     }
 
-    public Optional<Object> getStudent(Integer userId) throws SQLException {
-        ResultSet resultSet = conn.createStatement().executeQuery("select * from user u inner join student s on u.id = s.user_id where u.id = " + userId);
+    public Optional<Integer> getStudent(Integer userId) throws SQLException {
+        ResultSet resultSet = conn.createStatement().executeQuery("select s.id as id from user u inner join student s on u.id = s.user_id where u.id = " + userId);
         if(!resultSet.next())
             return Optional.empty();
-        return Optional.of(new Object());
+        return Optional.of(resultSet.getInt("id"));
     }
 
-    public Optional<Object> getFaculty(Integer userId) throws SQLException {
-        ResultSet resultSet = conn.createStatement().executeQuery("select * from user u inner join faculty f on u.id = f.user_id where u.id = " + userId);
+    public Optional<Integer> getFaculty(Integer userId) throws SQLException {
+        ResultSet resultSet = conn.createStatement().executeQuery("select f.id as id  from user u inner join faculty f on u.id = f.user_id where u.id = " + userId);
         if(!resultSet.next())
             return Optional.empty();
-        return Optional.of(new Object());
+        return Optional.of(resultSet.getInt("id"));
     }
 
-    public Optional<Object> getAcademicOffice(Integer userId) throws SQLException {
-        ResultSet resultSet = conn.createStatement().executeQuery("select * from user u inner join academicoffice a on u.id = a.user_id where u.id = " + userId);
+    public Optional<Integer> getAcademicOffice(Integer userId) throws SQLException {
+        ResultSet resultSet = conn.createStatement().executeQuery("select a.id as id from user u inner join academicoffice a on u.id = a.user_id where u.id = " + userId);
         if(!resultSet.next())
             return Optional.empty();
-        return Optional.of(new Object());
+        return Optional.of(resultSet.getInt("id"));
     }
 
 
     public void addLoginSession(Auth auth) throws SQLException {
         conn.createStatement().executeUpdate("insert into loginsession(user_id, timestamp) values("+auth.getUser().getId()+", '"+ LocalDateTime.now() +"')");
+    }
+
+    public void deleteLoginSession(Integer userId) throws SQLException {
+        conn.createStatement().executeUpdate("delete from loginsession where user_id = "+userId);
     }
 }

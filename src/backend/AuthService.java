@@ -33,7 +33,7 @@ public class AuthService {
         if(!checkValidUserType(auth.getUser().getId(), userType))
             return false;
         authRepo.addLoginSession(auth);
-        LoggedInUser.getInstance().setId(auth.getUser().getId());
+        LoggedInUser.getInstance().setUserId(auth.getUser().getId());
         LoggedInUser.getInstance().setEmail(auth.getUser().getEmail());
         LoggedInUser.getInstance().setName(auth.getUser().getFirstName() + " " + auth.getUser().getLastName());
         return true;
@@ -43,22 +43,35 @@ public class AuthService {
         switch (userType)
         {
             case STUDENT:
-                if(authRepo.getStudent(userId).isPresent())
+                Optional<Integer> studentOptional = authRepo.getStudent(userId);
+                if(studentOptional.isPresent())
+                {
+                    LoggedInUser.getInstance().setId(studentOptional.get());
                     return true;
+                }
                 break;
             case FACULTY:
-                if(authRepo.getFaculty(userId).isPresent())
+                Optional<Integer> facultyOptional = authRepo.getFaculty(userId);
+                if(facultyOptional.isPresent())
+                {
+                    LoggedInUser.getInstance().setId(facultyOptional.get());
                     return true;
+                }
                 break;
             case ACADOFFICE:
-                if(authRepo.getAcademicOffice(userId).isPresent())
+                Optional<Integer> acadOptional =authRepo.getAcademicOffice(userId);
+                if(acadOptional.isPresent())
+                {
+                    LoggedInUser.getInstance().setId(acadOptional.get());
                     return true;
+                }
         }
         return false;
     }
 
     public void logoutUser() throws SQLException {
         // Remove the user from LoggedInUser and from login session
+        authRepo.deleteLoginSession(LoggedInUser.getInstance().getUserId());
     }
 
     public boolean checkLoggedInUser(String email) throws SQLException {
