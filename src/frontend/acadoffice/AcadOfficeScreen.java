@@ -1,9 +1,7 @@
 package frontend.acadoffice;
 
 import backend.AuthService;
-import frontend.AuthScreen;
-import frontend.BackScreen;
-import frontend.Screen;
+import frontend.*;
 
 import java.sql.SQLException;
 
@@ -18,7 +16,8 @@ public class AcadOfficeScreen extends Screen {
 
     @Override
     public void preScreenProcess() {
-        new AuthScreen().show();
+        new AuthScreen(UserType.ACADOFFICE).show();
+        title += LoggedInUser.getInstance().getName();
     }
 
     @Override
