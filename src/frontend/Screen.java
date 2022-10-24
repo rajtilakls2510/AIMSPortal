@@ -15,18 +15,26 @@ public abstract class Screen {
         title = "";
         option = "";
         subScreens = new ArrayList<>();
+        // Don't add back screen otherwise infine recursion
     }
 
-    public Screen(String title, String option){
+    public Screen(String title, String option) {
         this();
         this.title = title;
         this.option = option;
     }
 
-    abstract public void process();
+    public void process() {
+    }
 
-    public void show() {
+    public void preScreenProcess() {
+    }
 
+    public void postScreenProcess() {
+    }
+
+    public void show() throws RuntimeException {
+        preScreenProcess();
         int choice = 1;
         do {
             clearConsole();
@@ -39,17 +47,21 @@ public abstract class Screen {
             Scanner sc = new Scanner(System.in);
             choice = sc.nextInt();
 
-            if (choice > 0 && choice <= subScreens.size())
-                subScreens.get(choice - 1).show();
-            else if (choice < 0 || choice > subScreens.size()) {
+            if (choice > 0 && choice <= subScreens.size()) {
+                try {
+                    subScreens.get(choice - 1).show();
+                } catch (Exception ignored) {
+                }
+            } else if (choice < 0 || choice > subScreens.size()) {
                 System.out.println("Invalid Option!");
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(1000);
                 } catch (InterruptedException ignored) {
                 }
             }
 
         } while (choice != 0);
+        postScreenProcess();
     }
 
     public void clearConsole() {

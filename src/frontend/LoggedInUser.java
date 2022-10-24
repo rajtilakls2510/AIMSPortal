@@ -4,13 +4,14 @@ public class LoggedInUser {
     private static LoggedInUser instance;
     private String name;
     private String email;
+    private String id;
 
     private LoggedInUser() {
         name = null;
         email = null;
     }
 
-    public LoggedInUser getInstance() {
+    public static LoggedInUser getInstance() {
         if (instance == null)
             instance = new LoggedInUser();
         return instance;
@@ -30,5 +31,13 @@ public class LoggedInUser {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

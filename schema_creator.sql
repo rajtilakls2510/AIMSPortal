@@ -37,7 +37,7 @@ create table batch (
 
 create table student (
 	id int not null auto_increment,
-    entryno varchar(10) not null unique,
+    entryno varchar(100) not null unique,
     user_id int not null,
     batch_id int not null,
     primary key (id),
@@ -117,7 +117,7 @@ create table courseregister (
 
 create table mtpinfo (
 	id int not null auto_increment,
-    student_id int not null,
+    student_id int null,
     faculty_id int not null,
     title varchar(100) not null,
     domains varchar(255),
@@ -126,3 +126,30 @@ create table mtpinfo (
     foreign key (student_id) references student (id) on delete cascade,
     foreign key (faculty_id) references faculty (id) on delete cascade
 );
+
+
+-- DATA INSERTION
+insert into user (first_name, last_name, email, phone, join_date) values ('Aditya' ,'Kumar', 'adi@iitrpr.ac.in', '1234567890', '2020-07-27');
+insert into user (first_name, last_name, email, phone, join_date) values ('Ayush' ,'Shukla', 'ayush@iitrpr.ac.in', '1234567890', '2021-07-27');
+insert into user (first_name, last_name, email, phone, join_date) values ('Sriya' ,'Sharma', 'shriya@iitrpr.ac.in', '1234567890', '2021-07-27');
+insert into user (first_name, last_name, email, phone, join_date) values ('Krishna' ,'Kumar', 'krishna@iitrpr.ac.in', '1234567890', '2022-07-27');
+insert into user (first_name, last_name, email, phone, join_date) values ('Raj' ,'Saha', 'raj@iitrpr.ac.in', '1234567890', '2010-07-27');
+insert into user (first_name, last_name, email, phone, join_date) values ('Raunak' ,'Sinha', 'raunak@iitrpr.ac.in', '1234567890', '2015-07-27');
+insert into user (first_name, last_name, email, phone, join_date) values ('Abhinav' ,'Jha', 'abhinav@iitrpr.ac.in', '1234567890', '2021-07-27');
+insert into batch (start_month, end_month, duration) values ('2020-07-27', '2022-06-01', 24);
+insert into batch (start_month, end_month, duration) values ('2021-07-27', '2023-06-01', 24);
+insert into batch (start_month, end_month, duration) values ('2022-07-27', '2024-06-01', 24);
+insert into student (entryno, user_id, batch_id) values ('2020CSM1008', 1, 1);
+insert into student (entryno, user_id, batch_id) values ('2021CSM1010', 2, 2);
+insert into student (entryno, user_id, batch_id) values ('2021CSM1002', 3, 2);
+insert into student (entryno, user_id, batch_id) values ('2022CSM1001', 4, 3);
+insert into faculty (user_id) values (5);
+insert into faculty (user_id) values (6);
+insert into academicoffice (user_id) values (7);
+insert into auth (user_id, password) values (1, 'aditya');
+insert into auth (user_id, password) values (2, 'ayush');
+insert into auth (user_id, password) values (3, 'sriya');
+insert into auth (user_id, password) values (4, 'krishna');
+insert into auth (user_id, password) values (5, 'raj');
+insert into auth (user_id, password) values (6, 'raunak');
+insert into auth (user_id, password) values (7, 'abhinav');
