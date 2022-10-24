@@ -1,6 +1,7 @@
 package backend;
 
 import database.models.Auth;
+import database.models.LoginSession;
 import database.repositories.AuthRepo;
 import frontend.LoggedInUser;
 import frontend.UserType;
@@ -74,8 +75,9 @@ public class AuthService {
         authRepo.deleteLoginSession(LoggedInUser.getInstance().getUserId());
     }
 
-    public boolean checkLoggedInUser(String email) throws SQLException {
+    public boolean checkLoggedInUser() throws SQLException {
         // Check User has an active login session or not
-        return true;
+        Optional<LoginSession> loginSession = authRepo.getLoginSession(LoggedInUser.getInstance().getUserId());
+        return loginSession.isPresent();
     }
 }

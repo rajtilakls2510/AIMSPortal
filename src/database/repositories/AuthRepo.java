@@ -58,4 +58,19 @@ public class AuthRepo extends Repository {
     public void deleteLoginSession(Integer userId) throws SQLException {
         conn.createStatement().executeUpdate("delete from loginsession where user_id = "+userId);
     }
+
+    public Optional<LoginSession> getLoginSession(Integer userId) throws SQLException {
+        ResultSet resultSet = conn.createStatement().executeQuery("select * from loginsession l inner join user u on l.user_id = u.id where l.user_id = '" + userId + "' order by l.id desc limit 1");
+        if(!resultSet.next())
+            return Optional.empty();
+        User user = new User(
+                resultSet.getInt("user_id"),
+                resultSet.getString("first_name"),
+                resultSet.getString("last_name"),
+                resultSet.getString("email"),
+                resultSet.getString("phone"),
+                resultSet.getDate("join_date").toLocalDate()
+                );
+        return Optional.of(new LoginSession(resultSet.getInt("id"), user, resultSet.getTimestamp("timestamp").toLocalDateTime()));
+    }
 }

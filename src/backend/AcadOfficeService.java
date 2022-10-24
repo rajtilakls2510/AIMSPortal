@@ -13,7 +13,9 @@ public class AcadOfficeService {
     private static AcadOfficeService instance;
 
     private AcadOfficeService()
-    {}
+    {
+        acadOfficeRepo = new AcadOfficeRepo();
+    }
 
     public static AcadOfficeService getInstance()
     {
