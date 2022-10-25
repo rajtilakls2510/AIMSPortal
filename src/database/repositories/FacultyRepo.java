@@ -125,4 +125,51 @@ public class FacultyRepo extends Repository {
         }
         return courseRegisters;
     }
+
+    public List<MTPInfo> getMTPInfo(Integer facultyId) throws SQLException {
+        // Fetch all the MTPs that the Faculty is offering. Use LEFT JOIN because of nullable student id F
+        List<MTPInfo> mtpinfo = new ArrayList<>();
+
+        ResultSet resultSet = conn.createStatement().executeQuery("select * from mtpinfo where faculty_id = " + facultyId);
+        while(resultSet.next()) {
+            mtpinfo.add(
+                    new MTPInfo(
+                            resultSet.getInt("id"),
+                            new Student(
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    resultSet.getInt("student_id"),
+                                    null,
+                                    null
+                            ),
+                            new Faculty(
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                            resultSet.getInt("faculty_id")
+                            ),
+                            resultSet.getString("title"),
+                            resultSet.getString("domains"),
+                            resultSet.getInt("credits")
+                    )
+            );
+        }
+        return mtpinfo;
+    }
+
+    public void addMTP(MTPInfo mtpInfo, Integer facultyId) throws SQLException {
+        conn.createStatement().executeUpdate("insert into mtpinfo (faculty_id, title, domains) values (" + facultyId + ", " + mtpInfo.getTitle() + ", " + mtpInfo.getDomains() + ")");
+    }
+
+    public void addMTPCredit(Integer mtpId, Integer credit) throws  SQLException {
+        // Update the credit of the mtp
+        conn.createStatement().executeUpdate("update mtpinfo set credits = " + credit + " where id = " + mtpId);
+    }
 }
