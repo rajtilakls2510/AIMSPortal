@@ -27,8 +27,7 @@ public class FacultyService {
 
     public List<Course> getAllOfferedCourses() throws SQLException {
         // Fetch all courses that this faculty is currently offering
-        List<Course> courses = facultyRepo.getCourses(); // TODO: Not correct. change IMPL
-        return null;
+        return facultyRepo.getAllOfferedCourses(LoggedInUser.getInstance().getId());
     }
 
     public List<Course> getAllUnofferedCourses() throws SQLException {
@@ -36,8 +35,10 @@ public class FacultyService {
         return facultyRepo.getAllUnofferedCourses();
     }
 
-    public CourseRegister getCourseDetails(String courseCode) throws SQLException {
+    public CourseRegister getCourseDetails(Integer courseId) throws SQLException {
         // Fetch the details of the course and its registered students
+        Course course = facultyRepo.getCourseDetails(courseId);
+
         return null;
     }
 

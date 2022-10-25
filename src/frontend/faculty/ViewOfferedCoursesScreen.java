@@ -22,8 +22,9 @@ public class ViewOfferedCoursesScreen extends ProtectedScreen {
         try {
             List<Course> allOfferedCourses = service.getAllOfferedCourses();
             subScreens = new ArrayList<>();
+            System.out.println("Offer Courses: (Select option to see details)");
             for(Course c: allOfferedCourses)
-                subScreens.add(new OfferedCourseDetailsScreen(String.format("%s - %s", c.getCode(), c.getTitle()), String.format("%s - %s", c.getCode(), c.getTitle()), c.getCode()));
+                subScreens.add(new OfferedCourseDetailsScreen(String.format("%s - %s", c.getCode(), c.getTitle()), String.format("%s - %s", c.getCode(), c.getTitle()), c.getId()));
         } catch (SQLException e) {
             System.out.println("Sorry! Some error occured");
         }
