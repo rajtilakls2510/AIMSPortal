@@ -148,7 +148,7 @@ insert into faculty (user_id) values (6);
 insert into academicoffice (user_id) values (7);
 insert into auth (user_id, password) values (1, 'aditya');
 insert into auth (user_id, password) values (2, 'ayush');
-insert into auth (user_id, password) values (3, 'sriya');
+insert into auth (user_id, password) values (3, 'shriya');
 insert into auth (user_id, password) values (4, 'krishna');
 insert into auth (user_id, password) values (5, 'raj');
 insert into auth (user_id, password) values (6, 'raunak');

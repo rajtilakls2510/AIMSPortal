@@ -62,4 +62,8 @@ public class FacultyService {
         // Add the offer for this course
         facultyRepo.offerCourse(course, LoggedInUser.getInstance().getId());
     }
+
+    public FacultyRepo getFacultyRepo() {
+        return facultyRepo;
+    }
 }
