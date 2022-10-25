@@ -179,3 +179,17 @@ insert into courseoffer (course_id, faculty_id, session_id) select course.id, fa
 insert into session (sem, year, status) values (1, 2022, "ACTIVE"),(1, 2021, "COMPLETED"),(2, 2021, "COMPLETED"),(1, 2020, "COMPLETED"),(2, 2020, "COMPLETED");
 insert into courseoffer (course_id, faculty_id, session_id) values (1, 1, 1),(2, 1, 1),(3, 2, 1),(4, 2, 1),(5, 1, 2),(6, 2, 2),(7, 1, 3),(8, 2, 4),(9, 1, 5);
 insert into offertype (batch_id, course_id, type) values (1, 1, 'CORE'),(1, 2, 'CORE'),(1, 3, 'CORE'),(1, 4, 'CORE'),(2, 5, 'CORE'),(2, 6, 'ELECTIVE'),(2, 7, 'ELECTIVE'),(3, 8, 'ELECTIVE'),(3, 9, 'ELECTIVE');
+UPDATE `aimsdb`.`courseoffer` SET `id` = '1' WHERE (`id` = '10');
+UPDATE `aimsdb`.`courseoffer` SET `id` = '2' WHERE (`id` = '11');
+UPDATE `aimsdb`.`courseoffer` SET `id` = '3' WHERE (`id` = '12');
+UPDATE `aimsdb`.`courseoffer` SET `id` = '4' WHERE (`id` = '13');
+UPDATE `aimsdb`.`courseoffer` SET `id` = '5' WHERE (`id` = '14');
+UPDATE `aimsdb`.`courseoffer` SET `id` = '6' WHERE (`id` = '15');
+UPDATE `aimsdb`.`courseoffer` SET `id` = '7' WHERE (`id` = '16');
+UPDATE `aimsdb`.`courseoffer` SET `id` = '8' WHERE (`id` = '17');
+UPDATE `aimsdb`.`courseoffer` SET `id` = '9' WHERE (`id` = '18');
+insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (1, 1, 8, 4, 'COMPLETED'),(1, 2, 9, 3, 'ENROLLED'),
+(1, 3, 7, 3, 'ENROLLED'),(1, 4, 8, 4, 'ENROLLED'),(2, 5, 8, 4, 'COMPLETED'),
+(2, 6, 8, 3, 'ENROLLED'),(2, 7, 9, 3, 'COMPLETED'),(3, 8, 7, 3, 'COMPLETED'),
+(3, 3, 7, NULL, 'DROPPED'),(4, 9, 8, 3, 'COMPLETED'),
+(4, 4, 8, NULL, 'DROPPED');
