@@ -46,16 +46,18 @@ public class FacultyService {
     }
 
     public List<MTPInfo> getMTPInfo() throws SQLException {
-        // Fetch all the MTPs that the Faculty is offering. Use LEFT JOIN because of nullable student id FK
-        return null;
+        // Fetch all the MTPs that the Faculty is offering. Use LEFT JOIN because of nullable student id F
+        return facultyRepo.getMTPInfo(LoggedInUser.getInstance().getId());
     }
 
     public void addMTP(MTPInfo mtpInfo) throws SQLException {
         // Add MTP without student.
+        facultyRepo.addMTP(mtpInfo, LoggedInUser.getInstance().getId());
     }
 
     public void addMTPCredit(Integer mtpId, Integer credit) throws  SQLException {
         // Update the credit of the mtp
+        facultyRepo.addMTPCredit(mtpId, credit);
     }
 
     public void offerCourse(Course course) throws SQLException {
