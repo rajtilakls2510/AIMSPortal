@@ -47,21 +47,23 @@ public class AcadOfficeRepo extends Repository{
         //inserting the prerequisite courses id for given courses in prerequisite table
         if(!prereq_course.isEmpty())
             for(Course a : prereq_course)
-                conn.createStatement().executeUpdate("insert into prerequisite(course_id, prereq_course_id) values (" + course.getId() + ", (select id from course where code='" + a.getCode() + "'))");
+                conn.createStatement().executeUpdate("insert into prerequisite(course_id, prereq_course_id) values ('" + course.getId() + "', (select id from course where code='" + a.getCode() + "'))");
     }
 
     public void editCourse(Course course) throws SQLException {
         //edit a course
-        conn.createStatement().executeQuery("update course code = "+course.getCode()+"title = "+course.getTitle()+"description = "+course.getDescription()+"credit = "+course.getCredit());
+        conn.createStatement().executeUpdate("update course code = '"+course.getCode()+"'title = '"+course.getTitle()+"'description = '"+course.getDescription()+"'credit = '"+course.getCredit()+"'where id = '"+course.getId());
+        conn.createStatement().executeUpdate("delete from prerequisite where course_id = '"+course.getId());
         List<Course> prereq_course = course.getPrerequisites();
         if(!prereq_course.isEmpty()){
             for(Course a : prereq_course)
-                conn.createStatement().executeQuery("update prerequisite course_id = "+course.getId()+"prepreq_course_id"+a.getId()+"where course_id = "+course.getId());
+                conn.createStatement().executeUpdate("insert into prerequisite where course_id = '"+course.getId()+"',prereq_course_id = '"+a.getId());
+
         }
     }
 
     public void deleteCourse(String code) throws SQLException{
         //delete a course
-        conn.createStatement().executeQuery("delete from course where code = "+code);
+        conn.createStatement().executeUpdate("delete from course where code = "+code);
     }
 }
