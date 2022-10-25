@@ -193,3 +193,5 @@ insert into courseregister (student_id, offer_id, grade, creditsreceived, status
 (2, 6, 8, 3, 'ENROLLED'),(2, 7, 9, 3, 'COMPLETED'),(3, 8, 7, 3, 'COMPLETED'),
 (3, 3, 7, NULL, 'DROPPED'),(4, 9, 8, 3, 'COMPLETED'),
 (4, 4, 8, NULL, 'DROPPED');
+update courseregister set creditsreceived = null where id = 2 or id = 3 or id = 4 or id = 6;
+update courseregister set grade = null where id = 11 or id = 9;
