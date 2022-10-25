@@ -4,6 +4,7 @@ import database.models.Course;
 import database.models.CourseRegister;
 import database.models.MTPInfo;
 import database.repositories.FacultyRepo;
+import frontend.LoggedInUser;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -30,9 +31,9 @@ public class FacultyService {
         return null;
     }
 
-    public List<Course> getAllCoursesForOffering() throws SQLException {
+    public List<Course> getAllUnofferedCourses() throws SQLException {
         // Fetch all active courses available for offering in this current session
-        return null;
+        return facultyRepo.getAllUnofferedCourses();
     }
 
     public CourseRegister getCourseDetails(String courseCode) throws SQLException {
@@ -55,5 +56,10 @@ public class FacultyService {
 
     public void addMTPCredit(Integer mtpId, Integer credit) throws  SQLException {
         // Update the credit of the mtp
+    }
+
+    public void offerCourse(Course course) throws SQLException {
+        // Add the offer for this course
+        facultyRepo.offerCourse(course, LoggedInUser.getInstance().getId());
     }
 }
