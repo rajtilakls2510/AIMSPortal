@@ -55,9 +55,9 @@ public class CourseCatalogScreen extends ProtectedScreen {
         });
 
         String formatString = " %-" + (columnLengths.get("Code")+2) + "s %-"+(columnLengths.get("Title")+2)+"s %-"+(columnLengths.get("Credit")+2)+"s\n";
-
+        System.out.printf(formatString, "Code", "Title", "Description", "L-T-P-S-C");
         courses.forEach(course -> System.out.printf(formatString, course.getCode(), course.getTitle(), course.getCredit()));
-        System.out.println("");
+        System.out.println();
     }
 
 }

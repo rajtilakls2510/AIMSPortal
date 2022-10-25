@@ -6,6 +6,7 @@ import frontend.BackScreen;
 import frontend.ProtectedScreen;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewOfferedCoursesScreen extends ProtectedScreen {
@@ -20,8 +21,10 @@ public class ViewOfferedCoursesScreen extends ProtectedScreen {
         FacultyService service = FacultyService.getInstance();
         try {
             List<Course> allOfferedCourses = service.getAllOfferedCourses();
+            subScreens = new ArrayList<>();
+            System.out.println("Offer Courses: (Select option to see details)");
             for(Course c: allOfferedCourses)
-                System.out.println(c); // TODO: Apply a formatter function to show courses
+                subScreens.add(new OfferedCourseDetailsScreen(String.format("%s - %s", c.getCode(), c.getTitle()), String.format("%s - %s", c.getCode(), c.getTitle()), c.getId()));
         } catch (SQLException e) {
             System.out.println("Sorry! Some error occured");
         }
