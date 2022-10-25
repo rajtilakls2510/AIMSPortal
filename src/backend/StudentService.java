@@ -1,15 +1,14 @@
 package backend;
 
-import database.models.CourseOffer;
-import database.models.CourseRegister;
-import database.models.MTPInfo;
-import database.models.Student;
+import database.models.*;
 import database.repositories.StudentRepo;
 import frontend.LoggedInUser;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class StudentService {
     private static StudentService instance;
@@ -41,16 +40,39 @@ public class StudentService {
 
     public List<CourseOffer> getAllOfferedCourses() throws SQLException {
         // Return the list of all offered courses for the current session
-        return new ArrayList<>();
+        return studentRepo.getAllOfferedCourses(LoggedInUser.getInstance().getId());
     }
 
-    public CourseOffer getCourseOfferDetails(Integer offerId) throws SQLException {
-        // Return the course offer using the offerId
-        return null;
-    }
-
-    public void registerforOffer(Integer offerId) throws SQLException{
+    public void registerforOffer(CourseOffer co) throws SQLException{
         // Register the current logged in student to the offered course if constraints permit. Throw SQLException if couldn't register
+        // Check avg credits for prev 2 sems
+        Integer avgCreditForLast2Sems = studentRepo.getAvgCreditForLast2Sems(LoggedInUser.getInstance().getId());
+        int registeredCredits = 0;
+        List<CourseRegister> registeredCourses = getRegisteredCourses();
+        for(CourseRegister c: registeredCourses)
+            registeredCredits += Integer.parseInt(String.valueOf(c.getOffer().getCourse().getCredit().charAt(c.getOffer().getCourse().getCredit().length()-1)));
+        registeredCredits += Integer.parseInt(String.valueOf(co.getCourse().getCredit().charAt(co.getCourse().getCredit().length()-1)));
+
+        if(registeredCredits > 1.25 *avgCreditForLast2Sems)
+        {
+            System.out.println("Credit Limit Reached!");
+            throw new SQLException();
+        }
+
+        // Find courses done by student and check prereqs
+        List<CourseRegister> allSessionRegisteredCourses = studentRepo.getAllSessionRegisteredCourses(LoggedInUser.getInstance().getId());
+        for(Course prereq: co.getCourse().getPrerequisites())
+        {
+            List<CourseRegister> courseRegisters = allSessionRegisteredCourses.stream().filter(c -> Objects.equals(c.getOffer().getCourse().getId(), prereq.getId())).collect(Collectors.toList());
+            if(courseRegisters.size() < 1)
+            {
+                System.out.println("Prerequisite not fulfilled: "+prereq.getCode()+ " - "+prereq.getTitle());
+                throw new SQLException();
+            }
+        }
+
+        // Register to offer
+        studentRepo.registerStudent(co.getOfferId(), LoggedInUser.getInstance().getId());
     }
 
     public List<CourseRegister> getRegisteredCourses() throws SQLException {
@@ -81,5 +103,9 @@ public class StudentService {
     public void registerForMtp(Integer mtpId) throws SQLException {
         // Register this student in the MTP with mtpId. Throw SQLException if couldn't register
         studentRepo.registerForMtp(mtpId, LoggedInUser.getInstance().getId());
+    }
+
+    public Course getCourseDetails(Integer courseId) throws SQLException {
+        return FacultyService.getInstance().getFacultyRepo().getCourseDetails(courseId);
     }
 }

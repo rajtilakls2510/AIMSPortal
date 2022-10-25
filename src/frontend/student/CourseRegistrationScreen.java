@@ -23,9 +23,11 @@ public class CourseRegistrationScreen extends ProtectedScreen {
         try {
             List<CourseOffer> offeredCourses = service.getAllOfferedCourses();
             subScreens = new ArrayList<>();
+            System.out.println("Available Courses for Registration: ");
             for(CourseOffer c : offeredCourses)
             {
-                subScreens.add(new CourseRegisterConfirmScreen(c.getCourse().getTitle(), c.getCourse().getTitle(), c.getOfferId())); // TODO: format title
+                String option = String.format("%s\t%-35s\t%s\t%s %s", c.getCourse().getCode(), c.getCourse().getTitle(), c.getCourse().getCredit(), c.getFaculty().getFirstName(), c.getFaculty().getLastName());
+                subScreens.add(new CourseRegisterConfirmScreen(c.getCourse().getCode()+" - "+c.getCourse().getTitle(), option, c.getOfferId(), c));
             }
 
         } catch (SQLException e) {
