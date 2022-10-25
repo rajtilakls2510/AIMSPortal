@@ -176,4 +176,5 @@ insert into prerequisite (course_id, prereq_course_id) values (9, 4);
 insert into prerequisite (course_id, prereq_course_id) values (9, 5);
 insert into prerequisite (course_id, prereq_course_id) values (9, 2);
 insert into courseoffer (course_id, faculty_id, session_id) select course.id, faculty.id, session.id from course join faculty join session where course.id = faculty.id+1;
-insert into session (sem, year, status) values (1, 2022, "ACTIVE"),(1, 2021, "ACTIVE"),(2, 2021, "COMPLETED"),(1, 2020, "COMPLETED"),(2, 2020, "COMPLETED");
+insert into session (sem, year, status) values (1, 2022, "ACTIVE"),(1, 2021, "COMPLETED"),(2, 2021, "COMPLETED"),(1, 2020, "COMPLETED"),(2, 2020, "COMPLETED");
+insert into courseoffer (course_id, faculty_id, session_id) values (1, 1, 1),(2, 1, 1),(3, 2, 1),(4, 2, 1),(5, 1, 2),(6, 2, 2),(7, 1, 3),(8, 2, 4),(9, 1, 5);
