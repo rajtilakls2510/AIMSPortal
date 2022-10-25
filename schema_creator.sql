@@ -165,6 +165,7 @@ insert into course (code, title, description, credit) values ("CS505","Spatial C
 insert into prerequisite (course_id, prereq_course_id) values (2, 1);
 insert into prerequisite (course_id, prereq_course_id) values (4, 1);
 insert into prerequisite (course_id, prereq_course_id) values (5, 1);
+insert into prerequisite (course_id, prereq_course_id) values (5, 2);
 insert into prerequisite (course_id, prereq_course_id) values (5, 3);
 insert into prerequisite (course_id, prereq_course_id) values (6, 5);
 insert into prerequisite (course_id, prereq_course_id) values (6, 3);

@@ -24,8 +24,17 @@ public class CourseDeleteScreen extends ProtectedScreen {
 
         try {
             service.deleteCourse(courseCode);
+            System.out.println("Course Deleted Successfully!");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {
+            }
         } catch (SQLException e) {
             System.out.println("Sorry! Something went wrong");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {
+            }
         }
     }
 
