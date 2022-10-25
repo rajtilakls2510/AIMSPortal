@@ -70,15 +70,16 @@ public class StudentService {
 
     public MTPInfo getRegisteredMTP() throws SQLException {
         // Return the MTPInfo of the student if he is already reistered to that MTP. Otherwise return null
-        return null;
+        return studentRepo.getRegisteredMTP(LoggedInUser.getInstance().getId());
     }
 
     public List<MTPInfo> getOfferedMTPs() throws SQLException {
         // Return all MTPs which are offered but does not have any students working on it
-        return null;
+        return studentRepo.getOfferedMTPs();
     }
 
     public void registerForMtp(Integer mtpId) throws SQLException {
         // Register this student in the MTP with mtpId. Throw SQLException if couldn't register
+        studentRepo.registerForMtp(mtpId, LoggedInUser.getInstance().getId());
     }
 }
