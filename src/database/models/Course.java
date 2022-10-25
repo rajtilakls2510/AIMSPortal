@@ -1,5 +1,6 @@
 package database.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Course {
@@ -22,6 +23,7 @@ public class Course {
         this.title = title;
         this.description = description;
         this.credit = credit;
+        prerequisites = new ArrayList<>();
     }
 
     public Course(
