@@ -7,6 +7,7 @@ import frontend.ProtectedScreen;
 import frontend.MessagePasser;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class OfferedCourseDetailsScreen extends ProtectedScreen {
     Integer courseId;
@@ -22,7 +23,8 @@ public class OfferedCourseDetailsScreen extends ProtectedScreen {
     public void process() {
         FacultyService service = FacultyService.getInstance();
         try {
-            CourseRegister courseDetails = service.getCourseDetails(courseId);
+            List<CourseRegister> courseDetails = service.getCourseDetails(courseId);
+            System.out.println(courseDetails);
             // TODO: Show course details
             // TODO: Show registered students and their grades
 

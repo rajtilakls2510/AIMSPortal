@@ -35,11 +35,10 @@ public class FacultyService {
         return facultyRepo.getAllUnofferedCourses();
     }
 
-    public CourseRegister getCourseDetails(Integer courseId) throws SQLException {
+    public List<CourseRegister> getCourseDetails(Integer courseId) throws SQLException {
         // Fetch the details of the course and its registered students
         Course course = facultyRepo.getCourseDetails(courseId);
-
-        return null;
+        return facultyRepo.getCourseRegisterForCourse(course, LoggedInUser.getInstance().getId());
     }
 
     public void gradeEntry(String entry, Integer grade, String courseCode) throws SQLException {
