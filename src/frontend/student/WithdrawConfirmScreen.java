@@ -20,7 +20,7 @@ public class WithdrawConfirmScreen extends ProtectedScreen {
         StudentService service = StudentService.getInstance();
         try {
             Scanner sc = new Scanner(System.in);
-            System.out.print("Are you sure you want to drop from course? (1/0)");
+            System.out.print("Are you sure you want to drop from course? (1/0) ");
             int confirm = sc.nextInt();
             if (confirm == 1) {
                 service.withdrawFromCourse(registrationId);

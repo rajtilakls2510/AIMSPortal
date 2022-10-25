@@ -4,6 +4,8 @@ import database.models.CourseOffer;
 import database.models.CourseRegister;
 import database.models.MTPInfo;
 import database.models.Student;
+import database.repositories.StudentRepo;
+import frontend.LoggedInUser;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,8 +13,9 @@ import java.util.List;
 
 public class StudentService {
     private static StudentService instance;
-
+    private StudentRepo studentRepo;
     private StudentService() {
+        studentRepo = new StudentRepo();
     }
 
     public static StudentService getInstance() {
@@ -52,11 +55,12 @@ public class StudentService {
 
     public List<CourseRegister> getRegisteredCourses() throws SQLException {
         // Return the list of all registed courses for the current session
-        return null;
+        return studentRepo.getRegisteredCourses(LoggedInUser.getInstance().getId());
     }
 
     public void withdrawFromCourse(Integer registrationId) throws SQLException {
         // Set the status of the course registration to DROPPED. Throw SQLException if couldn't drop
+        studentRepo.withdrawFromCourse(registrationId);
     }
 
     public boolean checkGraduation() throws SQLException {

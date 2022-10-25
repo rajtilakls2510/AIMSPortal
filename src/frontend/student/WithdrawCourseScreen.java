@@ -21,9 +21,10 @@ public class WithdrawCourseScreen extends ProtectedScreen {
         StudentService service = StudentService.getInstance();
         try {
             List<CourseRegister> registeredCourses = service.getRegisteredCourses();
+            System.out.println("Enrolled Courses: (Select one to withdraw)");
             subScreens = new ArrayList<>();
             for(CourseRegister c: registeredCourses)
-                subScreens.add(new WithdrawConfirmScreen(c.getOffer().getCourse().getTitle(), c.getOffer().getCourse().getTitle(), c.getId())); // TODO: Format title
+                subScreens.add(new WithdrawConfirmScreen(c.getOffer().getCourse().getTitle(), c.getOffer().getCourse().getTitle(), c.getId()));
         } catch (SQLException e) {
             System.out.println("Something went wrong");
         }
