@@ -165,7 +165,6 @@ insert into course (code, title, description, credit) values ("CS505","Spatial C
 insert into prerequisite (course_id, prereq_course_id) values (2, 1);
 insert into prerequisite (course_id, prereq_course_id) values (4, 1);
 insert into prerequisite (course_id, prereq_course_id) values (5, 1);
-insert into prerequisite (course_id, prereq_course_id) values (5, 2);
 insert into prerequisite (course_id, prereq_course_id) values (5, 3);
 insert into prerequisite (course_id, prereq_course_id) values (6, 5);
 insert into prerequisite (course_id, prereq_course_id) values (6, 3);
@@ -178,3 +177,5 @@ insert into prerequisite (course_id, prereq_course_id) values (9, 5);
 insert into prerequisite (course_id, prereq_course_id) values (9, 2);
 insert into courseoffer (course_id, faculty_id, session_id) select course.id, faculty.id, session.id from course join faculty join session where course.id = faculty.id+1;
 insert into session (sem, year, status) values (1, 2022, "ACTIVE"),(1, 2021, "COMPLETED"),(2, 2021, "COMPLETED"),(1, 2020, "COMPLETED"),(2, 2020, "COMPLETED");
+insert into courseoffer (course_id, faculty_id, session_id) values (1, 1, 1),(2, 1, 1),(3, 2, 1),(4, 2, 1),(5, 1, 2),(6, 2, 2),(7, 1, 3),(8, 2, 4),(9, 1, 5);
+insert into offertype (batch_id, course_id, type) values (1, 1, 'CORE'),(1, 2, 'CORE'),(1, 3, 'CORE'),(1, 4, 'CORE'),(2, 5, 'CORE'),(2, 6, 'ELECTIVE'),(2, 7, 'ELECTIVE'),(3, 8, 'ELECTIVE'),(3, 9, 'ELECTIVE');
