@@ -12,7 +12,7 @@ public class CourseEditScreen extends ProtectedScreen {
     public CourseEditScreen() {
         title = "Edit a Course";
         option = "Edit Course";
-        backScreen = new BackScreen("", "Back");
+        backScreen = new BackScreen();
     }
 
     @Override
@@ -35,6 +35,8 @@ public class CourseEditScreen extends ProtectedScreen {
     @Override
     public void show() throws RuntimeException {
         preScreenProcess();
+        clearConsole();
+        System.out.println("\n" + title + "\n");
         process();
         postScreenProcess();
     }

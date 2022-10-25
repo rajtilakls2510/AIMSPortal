@@ -1,4 +1,4 @@
-package frontend.acadoffice;
+package frontend;
 
 import java.util.HashMap;
 

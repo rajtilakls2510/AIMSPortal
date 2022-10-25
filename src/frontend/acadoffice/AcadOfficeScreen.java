@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class AcadOfficeScreen extends Screen {
     public AcadOfficeScreen() {
-        title = "Welcome Officer "; // TODO: Add name
+        title = "Welcome Mr. ";
         option = "Academic Officer";
         subScreens.add(new CourseCatalogScreen());
         subScreens.add(new StudentGradeScreen());

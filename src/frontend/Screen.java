@@ -15,7 +15,7 @@ public abstract class Screen {
         title = "";
         option = "";
         subScreens = new ArrayList<>();
-        // Don't add back screen otherwise infine recursion
+        // Don't add back screen otherwise infinite recursion
     }
 
     public Screen(String title, String option) {

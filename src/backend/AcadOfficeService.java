@@ -2,16 +2,20 @@ package backend;
 
 import database.models.Course;
 import database.models.CourseRegister;
+import database.repositories.AcadOfficeRepo;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AcadOfficeService {
+    AcadOfficeRepo acadOfficeRepo;
     private static AcadOfficeService instance;
 
     private AcadOfficeService()
-    {}
+    {
+        acadOfficeRepo = new AcadOfficeRepo();
+    }
 
     public static AcadOfficeService getInstance()
     {
@@ -22,12 +26,13 @@ public class AcadOfficeService {
 
     public List<Course> getCourses() throws SQLException {
         // Fetch all the courses from database and return them
-        return new ArrayList<>();
+        List <Course> course = acadOfficeRepo.getCourses();
+        return course;
     }
 
     public Course getCourse(String courseCode) throws SQLException {
         // Fetch the course
-        return null;
+        return acadOfficeRepo.getCourse(courseCode);
     }
 
     public List<CourseRegister> getGrade(String entry) throws SQLException {
@@ -43,13 +48,13 @@ public class AcadOfficeService {
     }
 
     public void addCourse(Course course) throws SQLException {
-        // Add a course
+        acadOfficeRepo.addCourse(course);
     }
 
     public void editCourse(Course course) throws SQLException{
-        // Edit a course
+        acadOfficeRepo.editCourse(course);
     }
     public void deleteCourse(String courseCode) throws SQLException {
-        // Delete a course
+        acadOfficeRepo.deleteCourse(courseCode);
     }
 }

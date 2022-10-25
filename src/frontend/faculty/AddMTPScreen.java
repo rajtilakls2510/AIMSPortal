@@ -11,7 +11,7 @@ public class AddMTPScreen extends ProtectedScreen {
     public AddMTPScreen() {
         title = "Offer a MTP";
         option = "Offer New MTP";
-        backScreen = new BackScreen("", "Back");
+        backScreen = new BackScreen();
     }
 
     @Override
@@ -29,6 +29,8 @@ public class AddMTPScreen extends ProtectedScreen {
     @Override
     public void show() throws RuntimeException {
         preScreenProcess();
+        clearConsole();
+        System.out.println("\n" + title + "\n");
         process();
         postScreenProcess();
     }
