@@ -3,5 +3,6 @@ package database.models;
 public enum CourseRegistrationStatus {
     ENROLLED,
     DROPPED,
-    COMPLETED
+    COMPLETED,
+    FAILED
 }

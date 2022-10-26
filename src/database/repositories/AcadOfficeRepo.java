@@ -1,6 +1,6 @@
 package database.repositories;
 
-import database.models.Course;
+import database.models.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -113,4 +113,22 @@ public class AcadOfficeRepo extends Repository {
         //delete a course
         conn.createStatement().executeUpdate("delete from course where code = '" + code + "'");
     }
+
+    public Optional<Student> getStudent(String entry) throws SQLException {
+        ResultSet resultSet = conn.createStatement().executeQuery("select s.id as id, first_name, last_name, user_id, entryno, join_date from (student s inner join user u on s.user_id = u.id) where entryno ='" + entry+"'");
+        if (!resultSet.next())
+            return Optional.empty();
+        return Optional.of(
+                new Student(
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        null,
+                        null,
+                        resultSet.getDate("join_date").toLocalDate(),
+                        resultSet.getInt("id"), resultSet.getString("entryno"), null
+                )
+        );
+    }
+
 }

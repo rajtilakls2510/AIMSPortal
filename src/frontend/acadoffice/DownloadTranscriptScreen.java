@@ -1,13 +1,12 @@
 package frontend.acadoffice;
 
-import backend.AcadOfficeService;
-import database.models.CourseRegister;
 import frontend.BackScreen;
 import frontend.MessagePasser;
 import frontend.ProtectedScreen;
 
-import java.sql.SQLException;
-import java.util.List;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class DownloadTranscriptScreen extends ProtectedScreen {
@@ -23,21 +22,28 @@ public class DownloadTranscriptScreen extends ProtectedScreen {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter Path to download file: ");
         String path = sc.nextLine().strip();
+        String transcript = (String) MessagePasser.getInstance().getMessages().get("Transcript");
         String entry = (String) MessagePasser.getInstance().getMessages().get("Entry");
-        AcadOfficeService service = AcadOfficeService.getInstance();
+
+        File dir = new File(path);
+        if (!dir.exists()) dir.mkdirs();
         try {
-            List<CourseRegister> registeredCourses = service.getGrade(entry);
-            // TODO: Store formatted Courses
-            Integer cgpa = service.getCgpa(entry);
-            // TODO: Store Cgpa
-            // TODO: Store in file
+            FileWriter fileWriter = new FileWriter(new File(path, entry + ".txt"));
+            fileWriter.write(transcript);
+            fileWriter.close();
             System.out.println("File Downloaded");
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ignored) {
             }
-        } catch (SQLException e) {
-            System.out.println("Could not fetch Grades!");
+        } catch (IOException e) {
+
+            System.out.println("Error while writing file");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+
+            }
         }
     }
 

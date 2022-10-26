@@ -4,19 +4,19 @@ import java.time.LocalDate;
 
 public class Batch {
     private Integer id;
-    private LocalDate startMonth;
-    private LocalDate endMonth;
+    private Session startSession;
+    private Session endSession;
     private Integer duration;
 
     public Batch(
             Integer id,
-            LocalDate startMonth,
-            LocalDate endMonth,
+            Session startSession,
+            Session endSession,
             Integer duration
     ) {
         this.id = id;
-        this.startMonth = startMonth;
-        this.endMonth = endMonth;
+        this.startSession = startSession;
+        this.endSession = endSession;
         this.duration = duration;
     }
 
@@ -28,20 +28,20 @@ public class Batch {
         this.id = id;
     }
 
-    public LocalDate getStartMonth() {
-        return startMonth;
+    public Session getStartSession() {
+        return startSession;
     }
 
-    public void setStartMonth(LocalDate startMonth) {
-        this.startMonth = startMonth;
+    public void setStartSession(Session startSession) {
+        this.startSession = startSession;
     }
 
-    public LocalDate getEndMonth() {
-        return endMonth;
+    public Session getEndSession() {
+        return endSession;
     }
 
-    public void setEndMonth(LocalDate endMonth) {
-        this.endMonth = endMonth;
+    public void setEndSession(Session endSession) {
+        this.endSession = endSession;
     }
 
     public Integer getDuration() {
@@ -56,8 +56,8 @@ public class Batch {
     public String toString() {
         return "Batch{" +
                 "id=" + id +
-                ", startMonth=" + startMonth +
-                ", endMonth=" + endMonth +
+                ", startSession=" + startSession +
+                ", endSession=" + endSession +
                 ", duration=" + duration +
                 '}';
     }

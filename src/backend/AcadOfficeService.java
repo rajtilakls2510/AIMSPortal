@@ -2,6 +2,8 @@ package backend;
 
 import database.models.Course;
 import database.models.CourseRegister;
+import database.models.Session;
+import database.models.Student;
 import database.repositories.AcadOfficeRepo;
 
 import java.sql.SQLException;
@@ -33,17 +35,20 @@ public class AcadOfficeService {
         return acadOfficeRepo.getCourse(courseCode);
     }
 
-    public List<CourseRegister> getGrade(String entry) throws SQLException {
-
-        StudentService studentService = StudentService.getInstance();
-        return studentService.getGrade(entry);
+    public Optional<Student> getStudentDetails(String entry) throws SQLException {
+        // Fetch the details of the student with this id
+        return acadOfficeRepo.getStudent(entry);
     }
 
-    public Integer getCgpa(String entry) throws SQLException {
-
-        StudentService studentService = StudentService.getInstance();
-        return studentService.getCgpa(entry);
+    public List<Session> getSessions(Integer id) throws SQLException {
+        return StudentService.getInstance().getSessions(id);
     }
+
+    public List<CourseRegister> getGrade(Integer id) throws SQLException {
+
+        return StudentService.getInstance().getGrade(id);
+    }
+
 
     public void addCourse(Course course) throws SQLException {
         acadOfficeRepo.addCourse(course);

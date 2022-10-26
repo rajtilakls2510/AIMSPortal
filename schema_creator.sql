@@ -27,14 +27,24 @@ create table academicoffice (
     foreign key (user_id) references user(id) on delete cascade
 );
 
-create table batch (
+create table session (
 	id int not null auto_increment,
-    start_month date not null,
-    end_month date null,
-    duration int,
+    sem int not null,
+    year int not null,
+    status varchar(10) not null,
     primary key (id)
 );
 
+
+create table batch (
+	id int not null auto_increment,
+    start_session int not null,
+    end_session int,
+    duration int,
+    primary key (id),
+    foreign key (start_session) references session(id),
+    foreign key (end_session) references session(id)
+);
 create table student (
 	id int not null auto_increment,
     entryno varchar(100) not null unique,
@@ -75,13 +85,6 @@ create table prerequisite (
     foreign key (prereq_course_id) references course (id) on delete cascade
 );
 
-create table session (
-	id int not null auto_increment,
-    sem int not null,
-    year int not null,
-    status varchar(10) not null,
-    primary key (id)
-);
 
 create table courseoffer (
 	id int not null auto_increment,
@@ -129,6 +132,7 @@ create table mtpinfo (
 
 
 -- DATA INSERTION
+insert into session (sem, year, status) values (1, 2022, "ACTIVE"),(1, 2021, "COMPLETED"),(2, 2021, "COMPLETED"),(1, 2020, "COMPLETED"),(2, 2020, "COMPLETED");
 insert into user (first_name, last_name, email, phone, join_date) values ('Aditya' ,'Kumar', 'adi@iitrpr.ac.in', '1234567890', '2020-07-27');
 insert into user (first_name, last_name, email, phone, join_date) values ('Ayush' ,'Shukla', 'ayush@iitrpr.ac.in', '1234567890', '2021-07-27');
 insert into user (first_name, last_name, email, phone, join_date) values ('Sriya' ,'Sharma', 'shriya@iitrpr.ac.in', '1234567890', '2021-07-27');
@@ -136,9 +140,9 @@ insert into user (first_name, last_name, email, phone, join_date) values ('Krish
 insert into user (first_name, last_name, email, phone, join_date) values ('Raj' ,'Saha', 'raj@iitrpr.ac.in', '1234567890', '2010-07-27');
 insert into user (first_name, last_name, email, phone, join_date) values ('Raunak' ,'Sinha', 'raunak@iitrpr.ac.in', '1234567890', '2015-07-27');
 insert into user (first_name, last_name, email, phone, join_date) values ('Abhinav' ,'Jha', 'abhinav@iitrpr.ac.in', '1234567890', '2021-07-27');
-insert into batch (start_month, end_month, duration) values ('2020-07-27', '2022-06-01', 24);
-insert into batch (start_month, end_month, duration) values ('2021-07-27', '2023-06-01', 24);
-insert into batch (start_month, end_month, duration) values ('2022-07-27', '2024-06-01', 24);
+insert into batch (start_session, end_session, duration) values (4, 3, 24);
+insert into batch (start_session, end_session, duration) values (2, 1, 24);
+insert into batch (start_session, end_session, duration) values (1, 1, 24);
 insert into student (entryno, user_id, batch_id) values ('2020CSM1008', 1, 1);
 insert into student (entryno, user_id, batch_id) values ('2021CSM1010', 2, 2);
 insert into student (entryno, user_id, batch_id) values ('2021CSM1002', 3, 2);
@@ -176,18 +180,17 @@ insert into prerequisite (course_id, prereq_course_id) values (9, 4);
 insert into prerequisite (course_id, prereq_course_id) values (9, 5);
 insert into prerequisite (course_id, prereq_course_id) values (9, 2);
 insert into courseoffer (course_id, faculty_id, session_id) select course.id, faculty.id, session.id from course join faculty join session where course.id = faculty.id+1;
-insert into session (sem, year, status) values (1, 2022, "ACTIVE"),(1, 2021, "COMPLETED"),(2, 2021, "COMPLETED"),(1, 2020, "COMPLETED"),(2, 2020, "COMPLETED");
 insert into courseoffer (course_id, faculty_id, session_id) values (1, 1, 1),(2, 1, 1),(3, 2, 1),(4, 2, 1),(5, 1, 2),(6, 2, 2),(7, 1, 3),(8, 2, 4),(9, 1, 5);
 insert into offertype (batch_id, course_id, type) values (1, 1, 'CORE'),(1, 2, 'CORE'),(1, 3, 'CORE'),(1, 4, 'CORE'),(2, 5, 'CORE'),(2, 6, 'ELECTIVE'),(2, 7, 'ELECTIVE'),(3, 8, 'ELECTIVE'),(3, 9, 'ELECTIVE');
-UPDATE `aimsdb`.`courseoffer` SET `id` = '1' WHERE (`id` = '10');
-UPDATE `aimsdb`.`courseoffer` SET `id` = '2' WHERE (`id` = '11');
-UPDATE `aimsdb`.`courseoffer` SET `id` = '3' WHERE (`id` = '12');
-UPDATE `aimsdb`.`courseoffer` SET `id` = '4' WHERE (`id` = '13');
-UPDATE `aimsdb`.`courseoffer` SET `id` = '5' WHERE (`id` = '14');
-UPDATE `aimsdb`.`courseoffer` SET `id` = '6' WHERE (`id` = '15');
-UPDATE `aimsdb`.`courseoffer` SET `id` = '7' WHERE (`id` = '16');
-UPDATE `aimsdb`.`courseoffer` SET `id` = '8' WHERE (`id` = '17');
-UPDATE `aimsdb`.`courseoffer` SET `id` = '9' WHERE (`id` = '18');
+-- UPDATE `aimsdb`.`courseoffer` SET `id` = '1' WHERE (`id` = '10');
+-- UPDATE `aimsdb`.`courseoffer` SET `id` = '2' WHERE (`id` = '11');
+-- UPDATE `aimsdb`.`courseoffer` SET `id` = '3' WHERE (`id` = '12');
+-- UPDATE `aimsdb`.`courseoffer` SET `id` = '4' WHERE (`id` = '13');
+-- UPDATE `aimsdb`.`courseoffer` SET `id` = '5' WHERE (`id` = '14');
+-- UPDATE `aimsdb`.`courseoffer` SET `id` = '6' WHERE (`id` = '15');
+-- UPDATE `aimsdb`.`courseoffer` SET `id` = '7' WHERE (`id` = '16');
+-- UPDATE `aimsdb`.`courseoffer` SET `id` = '8' WHERE (`id` = '17');
+-- UPDATE `aimsdb`.`courseoffer` SET `id` = '9' WHERE (`id` = '18');
 insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (1, 1, 8, 4, 'COMPLETED'),(1, 2, 9, 3, 'ENROLLED'),
 (1, 3, 7, 3, 'ENROLLED'),(1, 4, 8, 4, 'ENROLLED'),(2, 5, 8, 4, 'COMPLETED'),
 (2, 6, 8, 3, 'ENROLLED'),(2, 7, 9, 3, 'COMPLETED'),(3, 8, 7, 3, 'COMPLETED'),

@@ -7,6 +7,7 @@ import frontend.LoggedInUser;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class StudentService {
@@ -22,19 +23,14 @@ public class StudentService {
         return instance;
     }
 
-    public Student getStudentDetails(Integer id) throws SQLException {
+    public Optional<Student> getStudentDetails(Integer id) throws SQLException {
         // Fetch the details of the student with this id
-        return null;
+        return studentRepo.getStudent(id);
     }
 
-    public List<CourseRegister> getGrade(String entry) throws SQLException {
+    public List<CourseRegister> getGrade(Integer studentId) throws SQLException {
         // Return the list of registered Courses and their grades and statuses
-        return null;
-    }
-
-    public Integer getCgpa(String entry) throws SQLException {
-        // Return the cgpa of the student
-        return null;
+        return studentRepo.getGrade(studentId);
     }
 
     public List<CourseOffer> getAllOfferedCourses() throws SQLException {
@@ -106,5 +102,13 @@ public class StudentService {
 
     public Course getCourseDetails(Integer courseId) throws SQLException {
         return FacultyService.getInstance().getFacultyRepo().getCourseDetails(courseId);
+    }
+
+    public StudentRepo getStudentRepo() {
+        return studentRepo;
+    }
+
+    public List<Session> getSessions(Integer studentId) throws SQLException {
+        return studentRepo.getSession(studentId);
     }
 }

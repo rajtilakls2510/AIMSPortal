@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class StudentRepo extends Repository {
 
@@ -91,53 +92,53 @@ public class StudentRepo extends Repository {
             resultSet.next();
             credit.add(resultSet.getInt("avgcredit"));
         }
-        int sum = 0, num=0;
-        for(Integer c: credit) {
+        int sum = 0, num = 0;
+        for (Integer c : credit) {
             if (c != 0) {
                 sum += c;
                 num++;
             }
         }
-        if(num==0)
+        if (num == 0)
             return 16;
-        return sum/num;
+        return sum / num;
     }
 
     public void registerStudent(Integer offerId, Integer studentId) throws SQLException {
-        conn.createStatement().executeUpdate("insert into courseregister (student_id, offer_id, status) values ("+studentId+", "+offerId+" ,'"+ CourseRegistrationStatus.ENROLLED +"')");
+        conn.createStatement().executeUpdate("insert into courseregister (student_id, offer_id, status) values (" + studentId + ", " + offerId + " ,'" + CourseRegistrationStatus.ENROLLED + "')");
     }
 
     public MTPInfo getRegisteredMTP(Integer student_id) throws SQLException {
         // Return the MTPInfo of the student if he is already registered to that MTP. Otherwise return null
         ResultSet resultSet = conn.createStatement().executeQuery("select m.id as id, student_id, first_name, last_name, faculty_id, title, domains, credits from (mtpinfo m inner join faculty f on m.faculty_id = f.id) inner join user u on f.user_id = u.id where student_id = " + student_id);
-        if(!resultSet.next())
+        if (!resultSet.next())
             return null;
         return new MTPInfo(
-                            resultSet.getInt("id"),
-                            new Student(
-                                    null,
-                                    null,
-                                    null,
-                                    null,
-                                    null,
-                                    null,
-                                    resultSet.getInt("student_id"),
-                                    null,
-                                    null
-                            ),
-                            new Faculty(
-                                    null,
-                                    resultSet.getString("first_name"),
-                                    resultSet.getString("last_name"),
-                                    null,
-                                    null,
-                                    null,
-                                    resultSet.getInt("faculty_id")
-                            ),
-                            resultSet.getString("title"),
-                            resultSet.getString("domains"),
-                            resultSet.getInt("credits")
-                    );
+                resultSet.getInt("id"),
+                new Student(
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        resultSet.getInt("student_id"),
+                        null,
+                        null
+                ),
+                new Faculty(
+                        null,
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        null,
+                        null,
+                        null,
+                        resultSet.getInt("faculty_id")
+                ),
+                resultSet.getString("title"),
+                resultSet.getString("domains"),
+                resultSet.getInt("credits")
+        );
     }
 
     public List<MTPInfo> getOfferedMTPs() throws SQLException {
@@ -145,7 +146,7 @@ public class StudentRepo extends Repository {
         List<MTPInfo> mtpinfo = new ArrayList<>();
 
         ResultSet resultSet = conn.createStatement().executeQuery("select m.id as id, first_name, last_name, faculty_id, title, domains, credits  from (mtpinfo m inner join faculty f on m.faculty_id = f.id) inner join user u on f.user_id = u.id where student_id IS NULL");
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             mtpinfo.add(
                     new MTPInfo(
                             resultSet.getInt("id"),
@@ -184,5 +185,86 @@ public class StudentRepo extends Repository {
         if (!resultSet.isBeforeFirst() && resultSet.getRow() == 0) {
             conn.createStatement().executeUpdate("update mtpinfo set student_id = " + student_id + " where id = " + mtpId);
         }
+    }
+
+    public Optional<Student> getStudent(Integer id) throws SQLException {
+        ResultSet resultSet = conn.createStatement().executeQuery("select s.id as id, first_name, last_name, user_id, entryno, join_date from (student s inner join user u on s.user_id = u.id) where s.id =" + id);
+        if (!resultSet.next())
+            return Optional.empty();
+        return Optional.of(
+                new Student(
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        null,
+                        null,
+                        resultSet.getDate("join_date").toLocalDate(),
+                        resultSet.getInt("id"), resultSet.getString("entryno"), null
+                )
+        );
+    }
+
+
+    public List<CourseRegister> getGrade(Integer studentId) throws SQLException {
+        List<CourseRegister> courseRegisters = new ArrayList<>();
+        ResultSet resultSet = conn.createStatement().executeQuery("select cr.id as id, offer_id, course_id, code, title, description, credit, user_id, first_name, last_name, faculty_id, session_id, sem, year, s.status as session_status, grade, creditsreceived, cr.status as crstatus from " +
+                "((((courseregister cr inner join courseoffer co on cr.offer_id = co.id) inner join course c on co.course_id = c.id) inner join faculty f on f.id = co.faculty_id) inner join user u on f.user_id = u.id) inner join session s on s.id = co.session_id " +
+                "where student_id = " + studentId);
+        while (resultSet.next()) {
+            courseRegisters.add(
+                    new CourseRegister(
+                            resultSet.getInt("id"),
+                            null,
+                            new CourseOffer(
+                                    resultSet.getInt("offer_id"),
+                                    new Course(
+                                            resultSet.getInt("course_id"),
+                                            resultSet.getString("code"),
+                                            resultSet.getString("title"),
+                                            resultSet.getString("description"),
+                                            resultSet.getString("credit")
+                                    ),
+                                    new Faculty(
+                                            resultSet.getInt("user_id"),
+                                            resultSet.getString("first_name"),
+                                            resultSet.getString("last_name"),
+                                            null, null, null,
+                                            resultSet.getInt("faculty_id")
+                                    ),
+                                    new Session(
+                                            resultSet.getInt("session_id"),
+                                            resultSet.getInt("sem"),
+                                            resultSet.getInt("year"),
+                                            SessionStatus.valueOf(resultSet.getString("session_status"))
+                                            )
+                                    ),
+                            resultSet.getInt("grade"),
+                            resultSet.getInt("creditsreceived"),
+                            CourseRegistrationStatus.valueOf(resultSet.getString("crstatus"))
+                    )
+            );
+        }
+        return courseRegisters;
+    }
+
+    public List<Session> getSession(Integer studentId) throws SQLException {
+        ResultSet resultSet = conn.createStatement().executeQuery("select start_session, end_session from (student s inner join batch b on s.batch_id = b.id) where s.id = " + studentId);
+        resultSet.next();
+        int startSession = resultSet.getInt("start_session");
+        int endSession = resultSet.getInt("end_session");
+        ResultSet sessionResultSet = conn.createStatement().executeQuery("select * from session where year >= (select year from session where id=" + startSession + ") and year <= (select year from session where id=" + endSession + ") and status = 'COMPLETED' order by year, sem");
+        List<Session> sessions = new ArrayList<>();
+        while(sessionResultSet.next())
+        {
+            sessions.add(
+                    new Session(
+                            sessionResultSet.getInt("id"),
+                            sessionResultSet.getInt("sem"),
+                            sessionResultSet.getInt("year"),
+                            SessionStatus.valueOf(sessionResultSet.getString("status"))
+                    )
+            );
+        }
+        return sessions;
     }
 }
