@@ -267,4 +267,51 @@ public class StudentRepo extends Repository {
         }
         return sessions;
     }
+
+    public List<Integer> getFailedCourses(Integer studentId) throws SQLException {
+        List<Integer> failedCourses = new ArrayList<>();
+        ResultSet resultSet = conn.createStatement().executeQuery("select c.id as course_id from (courseregister cr inner join courseoffer co on cr.offer_id = co.id) inner join course c on co.course_id = c.id where student_id = " + studentId + " and status = 'FAILED'");
+        while (resultSet.next())
+            failedCourses.add(resultSet.getInt("course_id"));
+        return failedCourses;
+    }
+
+    public boolean checkPassedCourse(Integer studentId, Integer failedCourseId) throws SQLException {
+        ResultSet resultSet = conn.createStatement().executeQuery("select student_id, c.id as course_id from (courseregister cr inner join courseoffer co on cr.offer_id = co.id) inner join course c on co.course_id = c.id where student_id = " + studentId + " and status = 'COMPLETED' and c.id = " + failedCourseId);
+        if(!resultSet.next())
+            return false;
+        return true;
+    }
+
+    public List<Integer> getAllCoreCourses(Integer studentId) throws SQLException {
+        List<Integer> coreCourses = new ArrayList<>();
+        ResultSet resultSet = conn.createStatement().executeQuery("select course_id from batch b inner join offertype ot on ot.batch_id = b.id where b.id in (select batch_id from student s where s.id = " + studentId + ") and type = 'CORE'");
+        while(resultSet.next())
+            coreCourses.add(resultSet.getInt("course_id"));
+        return coreCourses;
+    }
+
+    public List<Integer> getAllCompletedCourses(Integer studentId) throws SQLException {
+        List<Integer> completedCourses = new ArrayList<>();
+        ResultSet resultSet = conn.createStatement().executeQuery("select DISTINCT(course_id) from (courseregister cr inner join courseoffer co on cr.offer_id = co.id) where student_id=" + studentId + " and status='COMPLETED'");
+        while(resultSet.next())
+            completedCourses.add(resultSet.getInt("course_id"));
+        return completedCourses;
+    }
+
+    public List<Integer> getAllElectiveCourses(Integer studentId) throws SQLException {
+        List<Integer> electiveCourses = new ArrayList<>();
+        ResultSet resultSet = conn.createStatement().executeQuery("select DISTINCT(course_id) from (courseregister cr inner join courseoffer co on cr.offer_id = co.id) where course_id not in (select DISTINCT(course_id) from batch b inner join offertype ot on ot.batch_id = b.id where b.id in (select batch_id from student s where s.id = "+studentId+") and type = 'CORE') and student_id="+studentId+" and status = 'COMPLETED'");
+        while (resultSet.next())
+            electiveCourses.add(resultSet.getInt("cousrse_id"));
+        return electiveCourses;
+    }
+
+    public Optional<Integer> getMtp(Integer studentId) throws SQLException {
+        ResultSet resultSet = conn.createStatement().executeQuery("select credits from mtpinfo where student_id = " + studentId);
+        if(!resultSet.next())
+            return Optional.empty();
+        return Optional.of(resultSet.getInt("credits"));
+
+    }
 }

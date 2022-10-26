@@ -17,8 +17,11 @@ public class CheckGraduationScreen extends ProtectedScreen {
     public void process() {
         StudentService service = StudentService.getInstance();
         try {
-            service.checkGraduation();
-            // TODO: Display whether the student has graduated or not
+            boolean b = service.checkGraduation();
+            if(b)
+                System.out.println("Congratulations! You have Graduated!");
+            else
+                System.out.println("Sorry! You are yet to Graduate!");
         } catch (SQLException e) {
             System.out.println("Something went wrong");
         }
