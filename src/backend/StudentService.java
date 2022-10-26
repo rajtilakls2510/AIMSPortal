@@ -112,4 +112,8 @@ public class StudentService {
     public StudentRepo getStudentRepo() {
         return studentRepo;
     }
+
+    public List<Session> getSessions(Integer studentId) throws SQLException {
+        return studentRepo.getSession(studentId);
+    }
 }

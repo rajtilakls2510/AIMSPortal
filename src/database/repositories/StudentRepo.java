@@ -261,4 +261,25 @@ public class StudentRepo extends Repository {
         }
         return courseRegisters;
     }
+
+    public List<Session> getSession(Integer studentId) throws SQLException {
+        ResultSet resultSet = conn.createStatement().executeQuery("select start_session, end_session from (student s inner join batch b on s.batch_id = b.id) where s.id = " + studentId);
+        resultSet.next();
+        int startSession = resultSet.getInt("start_session");
+        int endSession = resultSet.getInt("end_session");
+        ResultSet sessionResultSet = conn.createStatement().executeQuery("select * from session where year >= (select year from session where id=" + startSession + ") and year <= (select year from session where id=" + endSession + ") and status = 'COMPLETED' order by year, sem");
+        List<Session> sessions = new ArrayList<>();
+        while(sessionResultSet.next())
+        {
+            sessions.add(
+                    new Session(
+                            sessionResultSet.getInt("id"),
+                            sessionResultSet.getInt("sem"),
+                            sessionResultSet.getInt("year"),
+                            SessionStatus.valueOf(sessionResultSet.getString("status"))
+                    )
+            );
+        }
+        return sessions;
+    }
 }

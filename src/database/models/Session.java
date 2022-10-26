@@ -1,5 +1,7 @@
 package database.models;
 
+import java.util.Objects;
+
 public class Session {
     private Integer id;
     private Integer sem;
@@ -54,4 +56,9 @@ public class Session {
                 ", status=" + status +
                 '}';
     }
+    public boolean equals(Session s)
+    {
+        return Objects.equals(this.sem, s.getSem()) && Objects.equals(this.year, s.getYear());
+    }
+
 }
