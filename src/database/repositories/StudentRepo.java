@@ -303,7 +303,7 @@ public class StudentRepo extends Repository {
         List<Integer> electiveCourses = new ArrayList<>();
         ResultSet resultSet = conn.createStatement().executeQuery("select DISTINCT(course_id) from (courseregister cr inner join courseoffer co on cr.offer_id = co.id) where course_id not in (select DISTINCT(course_id) from batch b inner join offertype ot on ot.batch_id = b.id where b.id in (select batch_id from student s where s.id = "+studentId+") and type = 'CORE') and student_id="+studentId+" and status = 'COMPLETED'");
         while (resultSet.next())
-            electiveCourses.add(resultSet.getInt("cousrse_id"));
+            electiveCourses.add(resultSet.getInt("course_id"));
         return electiveCourses;
     }
 
