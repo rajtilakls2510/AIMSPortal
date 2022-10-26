@@ -92,7 +92,8 @@ public class FacultyRepo extends Repository {
                             resultSet.getString("code"),
                             resultSet.getString("title"),
                             resultSet.getString("description"),
-                            resultSet.getString("credit")
+                            resultSet.getString("credit"),
+                            getPrerequisites(resultSet.getInt("id"))
                     )
             );
         }
