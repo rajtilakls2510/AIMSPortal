@@ -36,11 +36,12 @@ public class CourseCatalogScreen extends ProtectedScreen {
     }
 
     private void showCourses(List<Course> courses) {
-        // TODO: Show prereqs of each course
+
         Map<String, Integer> columnLengths = new HashMap<>();
         columnLengths.put("Code", 6);
         columnLengths.put("Title", 7);
         columnLengths.put("Credit", 11);
+        columnLengths.put("Prerequisites", 15);
 
         courses.forEach(course -> {
             if(course.getCode().length() > columnLengths.get("Code"))
@@ -54,10 +55,22 @@ public class CourseCatalogScreen extends ProtectedScreen {
             if(course.getCredit().length() > columnLengths.get("Credit"))
                 columnLengths.put("Credit", course.getCredit().length());
         });
+        courses.forEach(course ->{
+            StringBuilder prer = new StringBuilder();
+            for(Course prereq: course.getPrerequisites())
+                prer.append(prereq.getCode()).append(", ");
+            if(prer.toString().length() > columnLengths.get("Prerequisites"))
+                columnLengths.put("Prerequisites", prer.toString().length());
+        });
 
-        String formatString = " %-" + (columnLengths.get("Code")+2) + "s %-"+(columnLengths.get("Title")+2)+"s %-"+(columnLengths.get("Credit")+2)+"s\n";
-        System.out.printf(formatString, "Code", "Title", "L-T-P-S-C");
-        courses.forEach(course -> System.out.printf(formatString, course.getCode(), course.getTitle(), course.getCredit()));
+        String formatString = " %-" + (columnLengths.get("Code")+2) + "s %-"+(columnLengths.get("Title")+2)+"s %-"+(columnLengths.get("Credit")+2)+"s %-"+(columnLengths.get("Prerequisites")+2)+"s\n";
+        System.out.printf(formatString, "Code", "Title", "L-T-P-S-C", "Prerequisites");
+        courses.forEach(course -> {
+            StringBuilder prer = new StringBuilder();
+            for(Course prereq: course.getPrerequisites())
+                prer.append(prereq.getCode()).append(", ");
+            System.out.printf(formatString, course.getCode(), course.getTitle(), course.getCredit(), prer.toString());
+        });
         System.out.println();
     }
 
