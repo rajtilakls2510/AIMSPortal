@@ -195,6 +195,8 @@ insert into courseregister (student_id, offer_id, grade, creditsreceived, status
 (4, 4, 8, NULL, 'DROPPED');
 update courseregister set creditsreceived = null where id = 2 or id = 3 or id = 4 or id = 6;
 update courseregister set grade = null where id = 11 or id = 9;
+insert into mtpinfo (faculty_id, title, domains) values (1, 'Spatial Data Mining', 'Spatial computing and data mining');
+insert into mtpinfo (student_id, faculty_id, title, domains) values(1, 1, 'Game Theoretic Aspects of Reinforcement Learning', 'Reinforcement Learning and Game Theory');
 insert into courseregister(student_id, offer_id, grade, creditsreceived, status) values (2, 1, 8, 4, 'COMPLETED'),(2, 3, 8, 3, 'COMPLETED'),(2, 4, 8, 4, 'COMPLETED');
 update courseregister set status = 'COMPLETED', grade = 7, creditsreceived = 3 where student_id = 3 and offer_id = 3;
 insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (3, 5, 8, 4, 'COMPLETED');

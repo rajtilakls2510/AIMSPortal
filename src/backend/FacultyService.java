@@ -46,7 +46,7 @@ public class FacultyService {
     }
 
     public List<MTPInfo> getMTPInfo() throws SQLException {
-        // Fetch all the MTPs that the Faculty is offering. Use LEFT JOIN because of nullable student id F
+        // Fetch all the MTPs that the Faculty is offering. Use LEFT JOIN because of nullable student id FK
         return facultyRepo.getMTPInfo(LoggedInUser.getInstance().getId());
     }
 
