@@ -33,6 +33,7 @@ public class AuthService {
         Auth auth = optionalAuth.get();
         if(!checkValidUserType(auth.getUser().getId(), userType))
             return false;
+        authRepo.deleteLoginSession(LoggedInUser.getInstance().getUserId());
         authRepo.addLoginSession(auth);
         LoggedInUser.getInstance().setUserId(auth.getUser().getId());
         LoggedInUser.getInstance().setEmail(auth.getUser().getEmail());

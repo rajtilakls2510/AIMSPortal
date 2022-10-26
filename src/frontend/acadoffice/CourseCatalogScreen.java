@@ -38,9 +38,9 @@ public class CourseCatalogScreen extends ProtectedScreen {
     private void showCourses(List<Course> courses) {
         // TODO: Show prereqs of each course
         Map<String, Integer> columnLengths = new HashMap<>();
-        columnLengths.put("Code", 0);
-        columnLengths.put("Title", 0);
-        columnLengths.put("Credit", 0);
+        columnLengths.put("Code", 6);
+        columnLengths.put("Title", 7);
+        columnLengths.put("Credit", 11);
 
         courses.forEach(course -> {
             if(course.getCode().length() > columnLengths.get("Code"))
@@ -56,7 +56,7 @@ public class CourseCatalogScreen extends ProtectedScreen {
         });
 
         String formatString = " %-" + (columnLengths.get("Code")+2) + "s %-"+(columnLengths.get("Title")+2)+"s %-"+(columnLengths.get("Credit")+2)+"s\n";
-        System.out.printf(formatString, "Code", "Title", "Description", "L-T-P-S-C");
+        System.out.printf(formatString, "Code", "Title", "L-T-P-S-C");
         courses.forEach(course -> System.out.printf(formatString, course.getCode(), course.getTitle(), course.getCredit()));
         System.out.println();
     }

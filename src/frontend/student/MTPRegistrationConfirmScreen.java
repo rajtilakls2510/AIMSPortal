@@ -1,17 +1,18 @@
 package frontend.student;
 
 import backend.StudentService;
+import database.models.MTPInfo;
 import frontend.ProtectedScreen;
 
 import java.sql.SQLException;
 import java.util.Scanner;
 
 public class MTPRegistrationConfirmScreen extends ProtectedScreen {
-    private Integer mtpId;
-    public MTPRegistrationConfirmScreen(String title, String option, Integer mtpId) {
+    private MTPInfo mtp;
+    public MTPRegistrationConfirmScreen(String title, String option, MTPInfo mtp) {
         this.title = title;
         this.option = option;
-        this.mtpId = mtpId;
+        this.mtp = mtp;
     }
 
     @Override
@@ -23,7 +24,7 @@ public class MTPRegistrationConfirmScreen extends ProtectedScreen {
         if(confirm == 1)
         {
             try {
-                service.registerForMtp(mtpId);
+                service.registerForMtp(mtp.getId());
                 System.out.println("Registered for MTP Successfully");
             } catch (SQLException e) {
                 System.out.println("Something went wrong");
