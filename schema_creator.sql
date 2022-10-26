@@ -205,3 +205,9 @@ update courseregister set grade = 8, status = 'COMPLETED', creditsreceived=4 whe
 update courseregister set status = 'COMPLETED', creditsreceived = 3 where offer_id = 2 or offer_id = 3;
 update courseregister set status = 'COMPLETED', creditsreceived = 4 where offer_id = 4;
 insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (1, 5, 8, 4, 'COMPLETED'),(1, 6, 8, 3, 'COMPLETED'),(1, 7, 9, 3, 'COMPLETED'),(1, 8, 8, 3, 'COMPLETED'),(1, 9, 8, 3, 'COMPLETED');
+update courseregister set grade = 9 where student_id = 2 or student_id = 3 and offer_id = 2;
+update courseregister set grade = NULL, creditsreceived = NULL, status = 'ENROLLED' where student_id = 2 and offer_id in (5, 6 ,7);
+update courseregister set grade = 8 where student_id= 2 and offer_id in (2,3);
+update courseregister set grade = 7 where student_id = 2 and offer_id = 4;
+update courseregister set offer_id = 6 where id=18; 
+insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (4, 1, 7, 4, 'COMPLETED');
