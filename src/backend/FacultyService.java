@@ -41,7 +41,7 @@ public class FacultyService {
         return facultyRepo.getCourseRegisterForCourse(course, LoggedInUser.getInstance().getId());
     }
 
-    public void gradeEntry(String entry, Integer grade, String courseCode) throws SQLException {
+    public void gradeEntry(String entry, Integer grade, Integer courseOfferId) throws SQLException {
         // Enter the grade for student, throw SQLException if grade could not be entered
     }
 

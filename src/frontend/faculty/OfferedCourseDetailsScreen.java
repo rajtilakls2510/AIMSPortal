@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OfferedCourseDetailsScreen extends ProtectedScreen {
     Course course;
@@ -19,7 +20,6 @@ public class OfferedCourseDetailsScreen extends ProtectedScreen {
         this.title = title;
         this.option = option;
         this.course = course;
-        subScreens.add(new GradeEntryScreen());
         backScreen = new BackScreen();
     }
 
@@ -37,8 +37,11 @@ public class OfferedCourseDetailsScreen extends ProtectedScreen {
 
             System.out.println("\nRegistered Students:- ");
             showStudents(courseDetails);
+            System.out.println(courseDetails);
+            if(courseDetails.stream().filter(c -> c.getStatus() == CourseRegistrationStatus.ENROLLED).count() > 0)
+                subScreens.add(new GradeEntryScreen(courseDetails.get(0).getOffer()));
 
-            MessagePasser.getInstance().getMessages().put("courseCode", course.getId());
+
         } catch (SQLException e) {
             System.out.println("Sorry! Some error occured");
         }
