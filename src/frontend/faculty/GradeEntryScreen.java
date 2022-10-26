@@ -5,8 +5,16 @@ import database.models.CourseOffer;
 import frontend.BackScreen;
 import frontend.ProtectedScreen;
 import frontend.MessagePasser;
+import backend.FacultyService;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class GradeEntryScreen extends ProtectedScreen {
@@ -31,6 +39,14 @@ public class GradeEntryScreen extends ProtectedScreen {
             } catch (InterruptedException e) {
             }
         }
+        catch (IOException ex)
+        {
+            System.out.println(ex.getMessage());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ignored) {
+            }
+        }
         catch (SQLException e)
         {
             System.out.println("Some error occured!");
@@ -42,8 +58,15 @@ public class GradeEntryScreen extends ProtectedScreen {
         }
     }
 
-    void parseGradeCsv(String path) throws SQLException
-    {
+    void parseGradeCsv(String path) throws SQLException, IOException {
         // TODO: Read each line of the csv and call gradeEntry of FacultyService
+        FacultyService service = FacultyService.getInstance();
+        BufferedReader csvReader = new BufferedReader(new FileReader(path));
+        String headerRow = csvReader.readLine(); //discarded header row
+        String row;
+        while((row = csvReader.readLine()) != null){
+            List<String> recordData = Arrays.asList(row.split(","));
+            service.gradeEntry(recordData.get(0), Integer.parseInt(recordData.get(1)), courseOffer.getOfferId());
+        }
     }
 }

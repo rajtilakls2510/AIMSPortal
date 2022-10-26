@@ -173,4 +173,12 @@ public class FacultyRepo extends Repository {
         // Update the credit of the mtp
         conn.createStatement().executeUpdate("update mtpinfo set credits = " + credit + " where id = " + mtpId);
     }
+
+    public void gradeEntry(String student_entry_no, Integer grade, Integer offer_id) throws SQLException {
+        // Enter the grade for student, throw SQLException if grade could not be entered
+        ResultSet resultSet = conn.createStatement().executeQuery("select id from student where entryno = '" + student_entry_no + "'");
+        resultSet.next();
+        Integer student_id =  resultSet.getInt("id");
+        conn.createStatement().executeUpdate("update courseregister set grade = " + grade + " where offer_id = " + offer_id + " and student_id  = " + student_id);
+    }
 }

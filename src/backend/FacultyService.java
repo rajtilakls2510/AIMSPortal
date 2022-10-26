@@ -41,8 +41,9 @@ public class FacultyService {
         return facultyRepo.getCourseRegisterForCourse(course, LoggedInUser.getInstance().getId());
     }
 
-    public void gradeEntry(String entry, Integer grade, Integer courseOfferId) throws SQLException {
+    public void gradeEntry(String student_entry_no, Integer grade, Integer courseOfferId) throws SQLException {
         // Enter the grade for student, throw SQLException if grade could not be entered
+        facultyRepo.gradeEntry(student_entry_no, grade, courseOfferId);
     }
 
     public List<MTPInfo> getMTPInfo() throws SQLException {
