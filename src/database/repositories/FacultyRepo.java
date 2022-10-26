@@ -128,23 +128,23 @@ public class FacultyRepo extends Repository {
     }
 
     public List<MTPInfo> getMTPInfo(Integer facultyId) throws SQLException {
-        // Fetch all the MTPs that the Faculty is offering. Use LEFT JOIN because of nullable student id F
+        // Fetch all the MTPs that the Faculty is offering. Use LEFT JOIN because of nullable student id FK
         List<MTPInfo> mtpinfo = new ArrayList<>();
 
-        ResultSet resultSet = conn.createStatement().executeQuery("select * from mtpinfo where faculty_id = " + facultyId);
+        ResultSet resultSet = conn.createStatement().executeQuery("select m.id as id, student_id, first_name, last_name, entryno, title, domains, credits, m.faculty_id as faculty_id from (mtpinfo m left join student s on m.student_id = s.id) left join user u on s.user_id = u.id where faculty_id = " + facultyId);
         while(resultSet.next()) {
             mtpinfo.add(
                     new MTPInfo(
                             resultSet.getInt("id"),
                             new Student(
                                     null,
-                                    null,
-                                    null,
+                                    resultSet.getString("first_name"),
+                                    resultSet.getString("last_name"),
                                     null,
                                     null,
                                     null,
                                     resultSet.getInt("student_id"),
-                                    null,
+                                    resultSet.getString("entryno"),
                                     null
                             ),
                             new Faculty(

@@ -22,7 +22,12 @@ public class MTPDetailsScreen extends ProtectedScreen {
         FacultyService service = FacultyService.getInstance();
         try {
             List<MTPInfo> mtps = service.getMTPInfo();
-            // TODO: Show all available MTPs and student working on it (if there is)
+            System.out.println("Available MTPs:-");
+            for (MTPInfo mtp : mtps) {
+                System.out.println("* " + mtp.getTitle() + "\tDomains: " + mtp.getDomains());
+                if(mtp.getStudent().getEntryNo() != null)
+                System.out.println("\tEntry: " + mtp.getStudent().getEntryNo() + " Name: " + mtp.getStudent().getFirstName() + " " + mtp.getStudent().getLastName() + " Credits: " + mtp.getCredits());
+            }
         } catch (SQLException e) {
             System.out.println("Sorry! Some error occured");
         }
