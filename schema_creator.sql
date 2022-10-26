@@ -213,3 +213,4 @@ update courseregister set offer_id = 6 where id=18;
 insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (4, 1, 7, 4, 'COMPLETED');
 delete from courseregister where offer_id = 7;
 update courseregister set grade = 0, creditsreceived = 0, status = 'FAILED' where student_id = 2 and offer_id = 4; 
+insert into courseregister(student_id, offer_id, grade, creditsreceived, status) values (2,7,8,3,'COMPLETED'),(2,8,8,3,'COMPLETED');
