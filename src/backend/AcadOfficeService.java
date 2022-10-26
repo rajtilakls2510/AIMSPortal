@@ -2,6 +2,7 @@ package backend;
 
 import database.models.Course;
 import database.models.CourseRegister;
+import database.models.Student;
 import database.repositories.AcadOfficeRepo;
 
 import java.sql.SQLException;
@@ -36,7 +37,9 @@ public class AcadOfficeService {
     public List<CourseRegister> getGrade(String entry) throws SQLException {
 
         StudentService studentService = StudentService.getInstance();
-        return studentService.getGrade(entry);
+        Optional<Student> studentOptional = studentService.getStudentRepo().getStudent(entry);
+        Student student = studentOptional.orElseThrow(SQLException::new);
+        return studentService.getGrade(student.getStudentId());
     }
 
     public Integer getCgpa(String entry) throws SQLException {
