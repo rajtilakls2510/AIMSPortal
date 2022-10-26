@@ -200,4 +200,8 @@ insert into mtpinfo (student_id, faculty_id, title, domains) values(1, 1, 'Game 
 insert into courseregister(student_id, offer_id, grade, creditsreceived, status) values (2, 1, 8, 4, 'COMPLETED'),(2, 3, 8, 3, 'COMPLETED'),(2, 4, 8, 4, 'COMPLETED');
 update courseregister set status = 'COMPLETED', grade = 7, creditsreceived = 3 where student_id = 3 and offer_id = 3;
 insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (3, 5, 8, 4, 'COMPLETED');
-insert into courseregister(student_id, offer_id, grade, creditsreceived, status) values (2, 2, NULL, NULL, 'DROPPED'),(3, 2, NULL, NULL, 'DROPPED'),(4, 1, NULL, NULL, 'DROPPED'),(4,2,9,3,'COMPLETED'),(4,3,7,3,'COMPLETED'),(4,4,8,4,'COMPLETED'),(4,5,8,4,'COMPLETED');
+insert into courseregister(student_id, offer_id, grade, creditsreceived, status) values (2, 2, NULL, NULL, 'DROPPED'),(3, 2, NULL, NULL, 'DROPPED'),(4, 1, NULL, NULL, 'DROPPED'),(4,2,9,3,'COMPLETED'),(4,3,7,3,'COMPLETED'),(4,5,8,4,'COMPLETED');
+update courseregister set grade = 8, status = 'COMPLETED', creditsreceived=4 where student_id = 4 and offer_id = 4;
+update courseregister set status = 'COMPLETED', creditsreceived = 3 where offer_id = 2 or offer_id = 3;
+update courseregister set status = 'COMPLETED', creditsreceived = 4 where offer_id = 4;
+insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (1, 5, 8, 4, 'COMPLETED'),(1, 6, 8, 3, 'COMPLETED'),(1, 7, 9, 3, 'COMPLETED'),(1, 8, 8, 3, 'COMPLETED'),(1, 9, 8, 3, 'COMPLETED');
