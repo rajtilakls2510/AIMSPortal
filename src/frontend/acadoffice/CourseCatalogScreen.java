@@ -36,6 +36,7 @@ public class CourseCatalogScreen extends ProtectedScreen {
     }
 
     private void showCourses(List<Course> courses) {
+        // TODO: Show prereqs of each course
         Map<String, Integer> columnLengths = new HashMap<>();
         columnLengths.put("Code", 0);
         columnLengths.put("Title", 0);

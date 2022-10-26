@@ -28,6 +28,7 @@ public class MTPDetailsScreen extends ProtectedScreen {
                 if(mtp.getStudent().getEntryNo() != null)
                 System.out.println("\tEntry: " + mtp.getStudent().getEntryNo() + " Name: " + mtp.getStudent().getFirstName() + " " + mtp.getStudent().getLastName() + " Credits: " + mtp.getCredits());
             }
+            System.out.println();
         } catch (SQLException e) {
             System.out.println("Sorry! Some error occured");
         }

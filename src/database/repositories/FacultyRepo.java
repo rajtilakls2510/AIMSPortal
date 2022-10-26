@@ -166,7 +166,7 @@ public class FacultyRepo extends Repository {
     }
 
     public void addMTP(MTPInfo mtpInfo, Integer facultyId) throws SQLException {
-        conn.createStatement().executeUpdate("insert into mtpinfo (faculty_id, title, domains) values (" + facultyId + ", " + mtpInfo.getTitle() + ", " + mtpInfo.getDomains() + ")");
+        conn.createStatement().executeUpdate("insert into mtpinfo (faculty_id, title, domains) values (" + facultyId + ", '" + mtpInfo.getTitle() + "', '" + mtpInfo.getDomains() + "')");
     }
 
     public void addMTPCredit(Integer mtpId, Integer credit) throws  SQLException {
