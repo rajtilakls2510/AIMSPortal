@@ -18,7 +18,7 @@ public class FacultyScreen extends Screen {
     @Override
     public void preScreenProcess() {
         new AuthScreen(UserType.FACULTY).show();
-        title += LoggedInUser.getInstance().getName();
+        title = "Welcome Dr. " + LoggedInUser.getInstance().getName();
     }
 
     @Override

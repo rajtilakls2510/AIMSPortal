@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class StudentScreen extends Screen {
 
     public StudentScreen() {
-        title = "Welcome Mr. ";
+        title = "Welcome Mr/Ms. ";
         option = "Student";
         subScreens.add(new ViewGradeScreen());
         subScreens.add(new CourseRegistrationScreen());
@@ -21,7 +21,7 @@ public class StudentScreen extends Screen {
     @Override
     public void preScreenProcess() {
         new AuthScreen(UserType.STUDENT).show();
-        title += LoggedInUser.getInstance().getName();
+        title = "Welcome Mr/Ms. " + LoggedInUser.getInstance().getName();
     }
 
     @Override

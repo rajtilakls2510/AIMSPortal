@@ -109,10 +109,9 @@ public class StudentRepo extends Repository {
 
     public MTPInfo getRegisteredMTP(Integer student_id) throws SQLException {
         // Return the MTPInfo of the student if he is already registered to that MTP. Otherwise return null
-        ResultSet resultSet = conn.createStatement().executeQuery("select * from mtpinfo where student_id = " + student_id);
-        if (!resultSet.isBeforeFirst() && resultSet.getRow() == 0) {
+        ResultSet resultSet = conn.createStatement().executeQuery("select m.id as id, student_id, first_name, last_name, faculty_id, title, domains, credits from (mtpinfo m inner join faculty f on m.faculty_id = f.id) inner join user u on f.user_id = u.id where student_id = " + student_id);
+        if(!resultSet.next())
             return null;
-        }
         return new MTPInfo(
                             resultSet.getInt("id"),
                             new Student(
@@ -128,8 +127,8 @@ public class StudentRepo extends Repository {
                             ),
                             new Faculty(
                                     null,
-                                    null,
-                                    null,
+                                    resultSet.getString("first_name"),
+                                    resultSet.getString("last_name"),
                                     null,
                                     null,
                                     null,
@@ -145,7 +144,7 @@ public class StudentRepo extends Repository {
         // Return all MTPs which are offered but does not have any students working on it
         List<MTPInfo> mtpinfo = new ArrayList<>();
 
-        ResultSet resultSet = conn.createStatement().executeQuery("select * from mtpinfo where student_id IS NULL");
+        ResultSet resultSet = conn.createStatement().executeQuery("select m.id as id, first_name, last_name, faculty_id, title, domains, credits  from (mtpinfo m inner join faculty f on m.faculty_id = f.id) inner join user u on f.user_id = u.id where student_id IS NULL");
         while(resultSet.next()) {
             mtpinfo.add(
                     new MTPInfo(
@@ -163,8 +162,8 @@ public class StudentRepo extends Repository {
                             ),
                             new Faculty(
                                     null,
-                                    null,
-                                    null,
+                                    resultSet.getString("first_name"),
+                                    resultSet.getString("last_name"),
                                     null,
                                     null,
                                     null,

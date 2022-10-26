@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class AcadOfficeScreen extends Screen {
     public AcadOfficeScreen() {
-        title = "Welcome Mr. ";
+        title = "Welcome Mr/Ms. ";
         option = "Academic Officer";
         subScreens.add(new CourseCatalogScreen());
         subScreens.add(new StudentGradeScreen());
@@ -17,7 +17,7 @@ public class AcadOfficeScreen extends Screen {
     @Override
     public void preScreenProcess() {
         new AuthScreen(UserType.ACADOFFICE).show();
-        title += LoggedInUser.getInstance().getName();
+        title = "Welcome Mr/Ms. " + LoggedInUser.getInstance().getName();
     }
 
     @Override

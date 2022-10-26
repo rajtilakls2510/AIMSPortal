@@ -21,15 +21,20 @@ public class ShowMTPScreen extends ProtectedScreen {
     @Override
     public void process() {
         StudentService service = StudentService.getInstance();
+        subScreens = new ArrayList<>();
         try {
             MTPInfo registeredMTP = service.getRegisteredMTP();
             if (registeredMTP == null) {
                 System.out.println("You are not registered to any MTP. Please register for one: ");
                 List<MTPInfo> offeredMTPs = service.getOfferedMTPs();
-                subScreens = new ArrayList<>();
                 showMtps(offeredMTPs);
             } else {
-                // TODO: Just show the MTP
+                System.out.println("Registered to: ");
+                System.out.println("Title: " + registeredMTP.getTitle());
+                System.out.println("Faculty: " + registeredMTP.getFaculty().getFirstName() + " " + registeredMTP.getFaculty().getLastName());
+                System.out.println("Domains: " + registeredMTP.getDomains());
+                System.out.println("Credits: " + registeredMTP.getCredits());
+                System.out.println();
             }
         } catch (SQLException e) {
             System.out.println("Something went wrong");
@@ -57,7 +62,7 @@ public class ShowMTPScreen extends ProtectedScreen {
         });
 
         String formatString = " %-" + (columnLengths.get("Title") + 2) + "s %-" + (columnLengths.get("Faculty") + 3) + "s %-" + (columnLengths.get("Domains") + 2) + "s";
-        System.out.printf(formatString + "\n", "Title", "Faculty", "Domains");
+        System.out.printf("\t" + formatString + "\n", "Title", "Faculty", "Domains");
         mtps.forEach(mtp -> {
             String option = String.format(formatString, mtp.getTitle(), mtp.getFaculty().getFirstName() + " " + mtp.getFaculty().getLastName(), mtp.getDomains());
             subScreens.add(new MTPRegistrationConfirmScreen(mtp.getTitle(), option, mtp));
