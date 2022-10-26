@@ -188,7 +188,7 @@ public class StudentRepo extends Repository {
     }
 
     public Optional<Student> getStudent(Integer id) throws SQLException {
-        ResultSet resultSet = conn.createStatement().executeQuery("select s.id as id, first_name, last_name, user_id from (student s inner join user u on s.user_id = u.id) where s.id =" + id);
+        ResultSet resultSet = conn.createStatement().executeQuery("select s.id as id, first_name, last_name, user_id, entryno, join_date from (student s inner join user u on s.user_id = u.id) where s.id =" + id);
         if (!resultSet.next())
             return Optional.empty();
         return Optional.of(
@@ -198,27 +198,12 @@ public class StudentRepo extends Repository {
                         resultSet.getString("last_name"),
                         null,
                         null,
-                        null,
-                        resultSet.getInt("id"), null, null
+                        resultSet.getDate("join_date").toLocalDate(),
+                        resultSet.getInt("id"), resultSet.getString("entryno"), null
                 )
         );
     }
-    public Optional<Student> getStudent(String entry) throws SQLException {
-        ResultSet resultSet = conn.createStatement().executeQuery("select s.id as id, first_name, last_name, from (student s inner join user u on s.user_id = u.id) where entryno =" + entry);
-        if (!resultSet.next())
-            return Optional.empty();
-        return Optional.of(
-                new Student(
-                        resultSet.getInt("user_id"),
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name"),
-                        null,
-                        null,
-                        null,
-                        resultSet.getInt("id"), null, null
-                )
-        );
-    }
+
 
     public List<CourseRegister> getGrade(Integer studentId) throws SQLException {
         List<CourseRegister> courseRegisters = new ArrayList<>();

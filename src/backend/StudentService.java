@@ -33,11 +33,6 @@ public class StudentService {
         return studentRepo.getGrade(studentId);
     }
 
-    public Integer getCgpa(String entry) throws SQLException {
-        // Return the cgpa of the student
-        return null;
-    }
-
     public List<CourseOffer> getAllOfferedCourses() throws SQLException {
         // Return the list of all offered courses for the current session
         return studentRepo.getAllOfferedCourses(LoggedInUser.getInstance().getId());
