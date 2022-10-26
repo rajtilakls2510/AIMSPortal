@@ -25,8 +25,8 @@ public class MTPDetailsScreen extends ProtectedScreen {
             System.out.println("Available MTPs:-");
             for (MTPInfo mtp : mtps) {
                 System.out.println("* " + mtp.getTitle() + "\tDomains: " + mtp.getDomains());
-                if(mtp.getStudent().getEntryNo() != null)
-                System.out.println("\tEntry: " + mtp.getStudent().getEntryNo() + " Name: " + mtp.getStudent().getFirstName() + " " + mtp.getStudent().getLastName() + " Credits: " + mtp.getCredits());
+                if (mtp.getStudent().getEntryNo() != null)
+                    System.out.println("\tEntry: " + mtp.getStudent().getEntryNo() + " Name: " + mtp.getStudent().getFirstName() + " " + mtp.getStudent().getLastName() + " Credits: " + mtp.getCredits());
             }
             System.out.println();
         } catch (SQLException e) {

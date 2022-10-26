@@ -12,7 +12,7 @@ import java.util.List;
 public class CreditEntryScreen extends ProtectedScreen {
 
     public CreditEntryScreen() {
-        title = "Credit Entry";
+        title = "Enter Credit for an MTP";
         option = "Enter Credit for an MTP";
         backScreen = new BackScreen();
     }
@@ -22,12 +22,10 @@ public class CreditEntryScreen extends ProtectedScreen {
         FacultyService service = FacultyService.getInstance();
         try {
             List<MTPInfo> mtps = service.getMTPInfo();
-
             subScreens = new ArrayList<>();
-            for(MTPInfo mtp: mtps)
-            {
-                if(mtp.getStudent() !=null)
-                subScreens.add(new MTPCreditEntryScreen(mtp.getTitle(), mtp.getTitle(), mtp.getId())); // TODO: Format Title
+            for (MTPInfo mtp : mtps) {
+                if (mtp.getStudent().getEntryNo() != null)
+                    subScreens.add(new MTPCreditEntryScreen(mtp.getTitle(), mtp.getTitle(), mtp));
             }
         } catch (SQLException e) {
             System.out.println("Sorry! Some error occured");
