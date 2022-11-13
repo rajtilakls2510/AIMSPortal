@@ -166,65 +166,22 @@ insert into course (code, title, description, credit) values ("CS502","Reinforce
 insert into course (code, title, description, credit) values ("CS503","Internet of Things","Internet of Things","3-0-0-6-3");
 insert into course (code, title, description, credit) values ("CS504","Digital Image Processing","Digital image processing","2-1-2-4-3");
 insert into course (code, title, description, credit) values ("CS505","Spatial Computing","Spatial computing","3-0-0-6-3");
-insert into prerequisite (course_id, prereq_course_id) values (2, 1);
-insert into prerequisite (course_id, prereq_course_id) values (4, 1);
-insert into prerequisite (course_id, prereq_course_id) values (5, 1);
-insert into prerequisite (course_id, prereq_course_id) values (5, 3);
-insert into prerequisite (course_id, prereq_course_id) values (6, 5);
-insert into prerequisite (course_id, prereq_course_id) values (6, 3);
-insert into prerequisite (course_id, prereq_course_id) values (7, 4);
-insert into prerequisite (course_id, prereq_course_id) values (8, 3);
-insert into prerequisite (course_id, prereq_course_id) values (8, 5);
-insert into prerequisite (course_id, prereq_course_id) values (9, 3);
-insert into prerequisite (course_id, prereq_course_id) values (9, 4);
-insert into prerequisite (course_id, prereq_course_id) values (9, 5);
-insert into prerequisite (course_id, prereq_course_id) values (9, 2);
-insert into courseoffer (course_id, faculty_id, session_id) select course.id, faculty.id, session.id from course join faculty join session where course.id = faculty.id+1;
-insert into courseoffer (course_id, faculty_id, session_id) values (1, 1, 1),(2, 1, 1),(3, 2, 1),(4, 2, 1),(5, 1, 2),(6, 2, 2),(7, 1, 3),(8, 2, 4),(9, 1, 5);
-insert into offertype (batch_id, course_id, type) values (1, 1, 'CORE'),(1, 2, 'CORE'),(1, 3, 'CORE'),(1, 4, 'CORE'),(2, 5, 'CORE'),(2, 6, 'ELECTIVE'),(2, 7, 'ELECTIVE'),(3, 8, 'ELECTIVE'),(3, 9, 'ELECTIVE');
--- UPDATE `aimsdb`.`courseoffer` SET `id` = '1' WHERE (`id` = '10');
--- UPDATE `aimsdb`.`courseoffer` SET `id` = '2' WHERE (`id` = '11');
--- UPDATE `aimsdb`.`courseoffer` SET `id` = '3' WHERE (`id` = '12');
--- UPDATE `aimsdb`.`courseoffer` SET `id` = '4' WHERE (`id` = '13');
--- UPDATE `aimsdb`.`courseoffer` SET `id` = '5' WHERE (`id` = '14');
--- UPDATE `aimsdb`.`courseoffer` SET `id` = '6' WHERE (`id` = '15');
--- UPDATE `aimsdb`.`courseoffer` SET `id` = '7' WHERE (`id` = '16');
--- UPDATE `aimsdb`.`courseoffer` SET `id` = '8' WHERE (`id` = '17');
--- UPDATE `aimsdb`.`courseoffer` SET `id` = '9' WHERE (`id` = '18');
-insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (1, 1, 8, 4, 'COMPLETED'),(1, 2, 9, 3, 'ENROLLED'),
-(1, 3, 7, 3, 'ENROLLED'),(1, 4, 8, 4, 'ENROLLED'),(2, 5, 8, 4, 'COMPLETED'),
-(2, 6, 8, 3, 'ENROLLED'),(2, 7, 9, 3, 'COMPLETED'),(3, 8, 7, 3, 'COMPLETED'),
-(3, 3, 7, NULL, 'DROPPED'),(4, 9, 8, 3, 'COMPLETED'),
-(4, 4, 8, NULL, 'DROPPED');
-update courseregister set creditsreceived = null where id = 2 or id = 3 or id = 4 or id = 6;
-update courseregister set grade = null where id = 11 or id = 9;
-insert into mtpinfo (faculty_id, title, domains) values (1, 'Spatial Data Mining', 'Spatial computing and data mining');
-insert into mtpinfo (student_id, faculty_id, title, domains) values(1, 1, 'Game Theoretic Aspects of Reinforcement Learning', 'Reinforcement Learning and Game Theory');
-insert into courseregister(student_id, offer_id, grade, creditsreceived, status) values (2, 1, 8, 4, 'COMPLETED'),(2, 3, 8, 3, 'COMPLETED'),(2, 4, 8, 4, 'COMPLETED');
-update courseregister set status = 'COMPLETED', grade = 7, creditsreceived = 3 where student_id = 3 and offer_id = 3;
-insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (3, 5, 8, 4, 'COMPLETED');
-insert into courseregister(student_id, offer_id, grade, creditsreceived, status) values (2, 2, NULL, NULL, 'DROPPED'),(3, 2, NULL, NULL, 'DROPPED'),(4, 1, NULL, NULL, 'DROPPED'),(4,2,9,3,'COMPLETED'),(4,3,7,3,'COMPLETED'),(4,5,8,4,'COMPLETED');
-update courseregister set grade = 8, status = 'COMPLETED', creditsreceived=4 where student_id = 4 and offer_id = 4;
-update courseregister set status = 'COMPLETED', creditsreceived = 3 where offer_id = 2;
-update courseregister set status = 'COMPLETED', creditsreceived = 4 where offer_id = 4;
-insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (1, 5, 8, 4, 'COMPLETED'),(1, 6, 8, 3, 'COMPLETED'),(1, 7, 9, 3, 'COMPLETED'),(1, 8, 8, 3, 'COMPLETED'),(1, 9, 8, 3, 'COMPLETED');
-update courseregister set grade = 9 where student_id = 2 or student_id = 3 and offer_id = 2;
-update courseregister set grade = NULL, creditsreceived = NULL, status = 'ENROLLED' where student_id = 2 and offer_id in (5, 6 ,7);
-update courseregister set grade = 8 where student_id= 2 and offer_id in (2,3);
-update courseregister set grade = 7 where student_id = 2 and offer_id = 4;
-update courseregister set offer_id = 6 where id=18; 
-insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (4, 1, 7, 4, 'COMPLETED');
-delete from courseregister where offer_id = 7;
-update courseregister set grade = 0, creditsreceived = 0, status = 'FAILED' where student_id = 2 and offer_id = 4; 
-insert into courseregister(student_id, offer_id, grade, creditsreceived, status) values (2,7,8,3,'COMPLETED'),(2,8,8,3,'COMPLETED');
-update courseregister set offer_id = 16, grade = 8, creditsreceived = 4, status = 'COMPLETED' where id = 5;
-update courseregister set offer_id = 17, grade = 8, creditsreceived = 3, status = 'COMPLETED' where id = 6;
-update courseregister set offer_id = 18, grade = 8, creditsreceived = 3, status = 'COMPLETED' where id = 12;
-update courseregister set offer_id = 19, grade = 8, creditsreceived = 4, status = 'COMPLETED' where id = 13;
-update courseregister set offer_id = 20, grade = 8, creditsreceived = 4, status = 'COMPLETED' where id = 14;
-update courseregister set offer_id = 21, grade = 8, creditsreceived = 3, status = 'COMPLETED' where id = 16;
-update courseregister set offer_id = 22, grade = 8, creditsreceived = 3, status = 'COMPLETED' where id = 28;
-update courseregister set offer_id = 23, grade = 8, creditsreceived = 3, status = 'COMPLETED' where id = 29;
-update courseregister set creditsreceived=3 where id=15;
-update mtpinfo set student_id = 2, credits =30 where id = 2;
-delete from offertype where batch_id = 1 and course_id in (1,4);
+insert into prerequisite (course_id, prereq_course_id) values (5, 1), (5, 3), (6, 3), (7, 4), (8, 1), (8, 3), (9, 2);
+insert into offertype (batch_id, course_id, type) values (1, 1, "CORE"), (1, 2, "CORE"), (1, 3, "CORE"), (1, 4, "CORE"),(1, 5, "ELECTIVE"),(1, 6, "ELECTIVE"),(1, 7, "ELECTIVE"),(1, 8, "ELECTIVE"),(1, 9, "ELECTIVE");
+insert into offertype (batch_id, course_id, type) values (2, 1, "CORE"), (2, 2, "ELECTIVE"), (2, 3, "CORE"), (2, 4, "CORE"),(2, 5, "ELECTIVE"),(2, 6, "ELECTIVE"),(2, 7, "ELECTIVE"),(2, 8, "ELECTIVE"),(2, 9, "ELECTIVE");
+insert into offertype (batch_id, course_id, type) values (3, 1, "CORE"), (3, 2, "CORE"), (3, 3, "CORE"), (3, 4, "ELECTIVE"),(3, 5, "ELECTIVE"),(3, 6, "ELECTIVE"),(3, 7, "ELECTIVE"),(3, 8, "ELECTIVE"),(3, 9, "ELECTIVE");
+
+insert into courseoffer (course_id, faculty_id, session_id) values (1, 1, 4), (2, 1, 4), (3, 2, 4), (4, 2, 4);
+insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (1, 1, 8, 4, 'COMPLETED'), (1, 2, 0, 0, 'DROPPED'), (1, 3, 8, 3, 'COMPLETED'), (1, 4, 9, 4, 'COMPLETED');
+insert into courseoffer (course_id, faculty_id, session_id) values (5, 1, 5), (6, 1, 5), (7, 2, 5), (8, 2, 5);
+insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (1, 5, 7, 4, 'COMPLETED'), (1, 6, 9, 3, 'COMPLETED'), (1, 7, 8, 3, 'COMPLETED'), (1, 8, 7, 3, 'COMPLETED');
+
+insert into courseoffer (course_id, faculty_id, session_id) values (1, 1, 2), (2, 1, 2), (3, 2, 2), (4, 2, 2);
+insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (2, 9, 7, 4, 'COMPLETED'), (2, 10, 9, 3, 'COMPLETED'), (2, 11, 8, 3, 'FAILED'), (2, 12, 7, 3, 'COMPLETED'), (1, 10, 9, 3, 'COMPLETED');
+insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (3, 9, 7, 4, 'COMPLETED'), (3, 10, 9, 3, 'COMPLETED'), (3, 11, 8, 3, 'COMPLETED'), (3, 12, 7, 3, 'COMPLETED');
+insert into courseoffer (course_id, faculty_id, session_id) values (5, 1, 3), (6, 1, 3), (7, 2, 3), (8, 2, 3), (9, 1, 3);
+insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (1, 17, 8, 3, 'COMPLETED'), (2, 15, 8, 3, 'COMPLETED'), (2, 17, 7, 3, 'COMPLETED');
+insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (3, 13, 8, 4, 'COMPLETED'), (3, 14, 9, 3, 'COMPLETED'), (3, 15, 8, 3, 'COMPLETED'), (3, 16, 9, 3, 'COMPLETED');
+
+insert into courseoffer (course_id, faculty_id, session_id) values (1, 1, 1), (2, 1, 1), (3, 2, 1), (4, 2, 1);
+insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (4, 18, 0, 0, 'ENROLLED'), (4, 19, 0, 0, 'ENROLLED'), (4, 20, 0, 0, 'ENROLLED'), (2, 20, 0, 0, 'ENROLLED');-- , (4, 21, 0, 0, 'ENROLLED');

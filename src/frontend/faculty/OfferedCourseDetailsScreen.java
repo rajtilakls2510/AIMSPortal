@@ -37,7 +37,7 @@ public class OfferedCourseDetailsScreen extends ProtectedScreen {
 
             System.out.println("\nRegistered Students:- ");
             showStudents(courseDetails);
-            System.out.println(courseDetails);
+            //System.out.println(courseDetails);
             if(courseDetails.stream().filter(c -> c.getStatus() == CourseRegistrationStatus.ENROLLED).count() > 0)
                 subScreens.add(new GradeEntryScreen(courseDetails.get(0).getOffer()));
 
@@ -55,28 +55,28 @@ public class OfferedCourseDetailsScreen extends ProtectedScreen {
         columnLengths.put("Credit", 9);
 
         courseRegisters.forEach(cr -> {
-            if(cr.getStatus() == CourseRegistrationStatus.ENROLLED && cr.getStudent().getEntryNo().length() > columnLengths.get("Entry"))
+            if(cr.getStudent().getEntryNo().length() > columnLengths.get("Entry"))
                 columnLengths.put("Entry", cr.getStudent().getEntryNo().length());
         });
         courseRegisters.forEach(cr -> {
-            if(cr.getStatus() == CourseRegistrationStatus.ENROLLED && cr.getStudent().getFirstName().length()+cr.getStudent().getLastName().length() > columnLengths.get("Name"))
+            if(cr.getStudent().getFirstName().length()+cr.getStudent().getLastName().length() > columnLengths.get("Name"))
                 columnLengths.put("Name", cr.getStudent().getFirstName().length()+cr.getStudent().getLastName().length());
         });
 
         courseRegisters.forEach(cr -> {
-            if(cr.getStatus() == CourseRegistrationStatus.ENROLLED && String.valueOf(cr.getGrade()).length() > columnLengths.get("Grade"))
+            if(String.valueOf(cr.getGrade()).length() > columnLengths.get("Grade"))
                 columnLengths.put("Grade", String.valueOf(cr.getGrade()).length());
         });
 
         courseRegisters.forEach(cr -> {
-            if(cr.getStatus() == CourseRegistrationStatus.ENROLLED && String.valueOf(cr.getCreditsReceived()).length() > columnLengths.get("Credit"))
+            if(String.valueOf(cr.getCreditsReceived()).length() > columnLengths.get("Credit"))
                 columnLengths.put("Credit", String.valueOf(cr.getCreditsReceived()).length());
         });
         System.out.println();
         String formatString = " %-" + (columnLengths.get("Entry")+2) + "s %-"+(columnLengths.get("Name")+3)+"s %-"+(columnLengths.get("Grade")+2)+"s %-"+(columnLengths.get("Credit")+2)+"s\n";
         System.out.printf(formatString, "Entry", "Name", "Grade", "Credits");
         courseRegisters.forEach(cr -> {
-            if(cr.getStatus() == CourseRegistrationStatus.ENROLLED)
+
                 System.out.printf(formatString, cr.getStudent().getEntryNo(), cr.getStudent().getFirstName()+" "+cr.getStudent().getLastName(), String.valueOf(cr.getGrade()), String.valueOf(cr.getCreditsReceived()));
         });
         System.out.println();
