@@ -157,10 +157,10 @@ insert into auth (user_id, password) values (4, 'krishna');
 insert into auth (user_id, password) values (5, 'raj');
 insert into auth (user_id, password) values (6, 'raunak');
 insert into auth (user_id, password) values (7, 'abhinav');
-insert into course (code, title, description, credit) values ("CS506","Data structure and algorithm","Data structure and Algorithms","3-1-2-6-4");
-insert into course (code, title, description, credit) values ("CS509","PG Software Lab","PG Software Lab","0-0-6-6-3");
-insert into course (code, title, description, credit) values ("CS526","Mathematical Foundation of Computer Science","Mathematical Foundation of Computer Science","3-1-0-5-3");
-insert into course (code, title, description, credit) values ("CS527","Computer Systems","Computer Systems","3-0-2-7-4");
+insert into course (code, title, description, credit) values ("CS506","Data structure and algorithm","Learn about the various kinds of Data structure and Algorithms.","3-1-2-6-4");
+insert into course (code, title, description, credit) values ("CS509","PG Software Lab","Learn System Design and Apply it to scalable architectures.","0-0-6-6-3");
+insert into course (code, title, description, credit) values ("CS526","Mathematical Foundation of Computer Science","Mathematical Foundations for the upcoming Machine Learning courses.","3-1-0-5-3");
+insert into course (code, title, description, credit) values ("CS527","Computer Systems","Learn about computer systems in a connected way and fill the gaps present in your knowledge about systems.","3-0-2-7-4");
 insert into course (code, title, description, credit) values ("CS501","Data Science and Machine Learning","Data Science and Machine Learning","3-0-2-6-4");
 insert into course (code, title, description, credit) values ("CS502","Reinforcement Learning","Reinforcement Learning","2-0-2-5-3");
 insert into course (code, title, description, credit) values ("CS503","Internet of Things","Internet of Things","3-0-0-6-3");
@@ -177,11 +177,14 @@ insert into courseoffer (course_id, faculty_id, session_id) values (5, 1, 5), (6
 insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (1, 5, 7, 4, 'COMPLETED'), (1, 6, 9, 3, 'COMPLETED'), (1, 7, 8, 3, 'COMPLETED'), (1, 8, 7, 3, 'COMPLETED');
 
 insert into courseoffer (course_id, faculty_id, session_id) values (1, 1, 2), (2, 1, 2), (3, 2, 2), (4, 2, 2);
-insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (2, 9, 7, 4, 'COMPLETED'), (2, 10, 9, 3, 'COMPLETED'), (2, 11, 8, 3, 'FAILED'), (2, 12, 7, 3, 'COMPLETED'), (1, 10, 9, 3, 'COMPLETED');
-insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (3, 9, 7, 4, 'COMPLETED'), (3, 10, 9, 3, 'COMPLETED'), (3, 11, 8, 3, 'COMPLETED'), (3, 12, 7, 3, 'COMPLETED');
+insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (2, 9, 7, 4, 'COMPLETED'), (2, 10, 9, 3, 'COMPLETED'), (2, 11, 0, 0, 'FAILED'), (2, 12, 7, 4, 'COMPLETED'), (1, 10, 9, 3, 'COMPLETED');
+insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (3, 9, 7, 4, 'COMPLETED'), (3, 10, 9, 3, 'COMPLETED'), (3, 11, 8, 3, 'COMPLETED'), (3, 12, 7, 4, 'COMPLETED');
 insert into courseoffer (course_id, faculty_id, session_id) values (5, 1, 3), (6, 1, 3), (7, 2, 3), (8, 2, 3), (9, 1, 3);
 insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (1, 17, 8, 3, 'COMPLETED'), (2, 15, 8, 3, 'COMPLETED'), (2, 17, 7, 3, 'COMPLETED');
 insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (3, 13, 8, 4, 'COMPLETED'), (3, 14, 9, 3, 'COMPLETED'), (3, 15, 8, 3, 'COMPLETED'), (3, 16, 9, 3, 'COMPLETED');
 
 insert into courseoffer (course_id, faculty_id, session_id) values (1, 1, 1), (2, 1, 1), (3, 2, 1), (4, 2, 1);
 insert into courseregister (student_id, offer_id, grade, creditsreceived, status) values (4, 18, 0, 0, 'ENROLLED'), (4, 19, 0, 0, 'ENROLLED'), (4, 20, 0, 0, 'ENROLLED'), (2, 20, 0, 0, 'ENROLLED');-- , (4, 21, 0, 0, 'ENROLLED');
+
+insert into mtpinfo (faculty_id, title, domains) values (1, 'Spatial Data Mining', 'Spatial computing and data mining');
+insert into mtpinfo (student_id, faculty_id, title, domains) values(1, 1, 'Game Theoretic Aspects of Reinforcement Learning', 'Reinforcement Learning and Game Theory');

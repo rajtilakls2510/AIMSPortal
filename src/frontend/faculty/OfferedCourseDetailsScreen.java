@@ -9,6 +9,7 @@ import frontend.ProtectedScreen;
 import frontend.MessagePasser;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +40,10 @@ public class OfferedCourseDetailsScreen extends ProtectedScreen {
             showStudents(courseDetails);
             //System.out.println(courseDetails);
             if(courseDetails.stream().filter(c -> c.getStatus() == CourseRegistrationStatus.ENROLLED).count() > 0)
+            {
+                subScreens = new ArrayList<>();
                 subScreens.add(new GradeEntryScreen(courseDetails.get(0).getOffer()));
+            }
 
 
         } catch (SQLException e) {
@@ -76,8 +80,7 @@ public class OfferedCourseDetailsScreen extends ProtectedScreen {
         String formatString = " %-" + (columnLengths.get("Entry")+2) + "s %-"+(columnLengths.get("Name")+3)+"s %-"+(columnLengths.get("Grade")+2)+"s %-"+(columnLengths.get("Credit")+2)+"s\n";
         System.out.printf(formatString, "Entry", "Name", "Grade", "Credits");
         courseRegisters.forEach(cr -> {
-
-                System.out.printf(formatString, cr.getStudent().getEntryNo(), cr.getStudent().getFirstName()+" "+cr.getStudent().getLastName(), String.valueOf(cr.getGrade()), String.valueOf(cr.getCreditsReceived()));
+            System.out.printf(formatString, cr.getStudent().getEntryNo(), cr.getStudent().getFirstName()+" "+cr.getStudent().getLastName(), String.valueOf(cr.getGrade()), String.valueOf(cr.getCreditsReceived()));
         });
         System.out.println();
     }
